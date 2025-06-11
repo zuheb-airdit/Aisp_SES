@@ -1,0 +1,107 @@
+_schema-version: "3.2"
+ID: AISP_VIM_SES
+version: 0.0.1
+modules:
+- name: AISP_VIM_SES-destination-content
+  type: com.sap.application.content
+  requires:
+  - name: AISP_VIM_SES-destination-service
+    parameters:
+      content-target: true
+  - name: AISP_VIM_SES_html_repo_host
+    parameters:
+      service-key:
+        name: AISP_VIM_SES_html_repo_host-key
+  - name: uaa_AISP_VIM_SES
+    parameters:
+      service-key:
+        name: uaa_AISP_VIM_SES-key
+  parameters:
+    content:
+      instance:
+        destinations:
+        - Name: AISP_VIM_SES_AISP_VIM_SES_html_repo_host
+          ServiceInstanceName: AISP_VIM_SES-html5-app-host-service
+          ServiceKeyName: AISP_VIM_SES_html_repo_host-key
+          sap.cloud.service: AISP_VIM_SES
+        - Authentication: OAuth2UserTokenExchange
+          Name: AISP_VIM_SES_uaa_AISP_VIM_SES
+          ServiceInstanceName: AISP_VIM_SES-xsuaa-service
+          ServiceKeyName: uaa_AISP_VIM_SES-key
+          sap.cloud.service: AISP_VIM_SES
+        existing_destinations_policy: ignore
+  build-parameters:
+    no-source: true
+- name: AISP_VIM_SES-app-content
+  type: com.sap.application.content
+  path: .
+  requires:
+  - name: AISP_VIM_SES_html_repo_host
+    parameters:
+      content-target: true
+  build-parameters:
+    build-result: resources
+    requires:
+    - artifacts:
+      - comvimsesvimses.zip
+      name: comvimsesvimses
+      target-path: resources/
+    - artifacts:
+      - comsesapprovalvimsesapproval.zip
+      name: comsesapprovalvimsesapproval
+      target-path: resources/
+- name: comvimsesvimses
+  type: html5
+  path: vim_ses
+  build-parameters:
+    build-result: dist
+    builder: custom
+    commands:
+    - npm install
+    - npm run build:cf
+    supported-platforms: []
+- name: comsesapprovalvimsesapproval
+  type: html5
+  path: vim_ses_approval
+  build-parameters:
+    build-result: dist
+    builder: custom
+    commands:
+    - npm install
+    - npm run build:cf
+    supported-platforms: []
+resources:
+- name: AISP_VIM_SES-destination-service
+  type: org.cloudfoundry.managed-service
+  parameters:
+    config:
+      HTML5Runtime_enabled: true
+      init_data:
+        instance:
+          destinations:
+          - Authentication: NoAuthentication
+            Name: ui5
+            ProxyType: Internet
+            Type: HTTP
+            URL: https://ui5.sap.com
+          existing_destinations_policy: update
+      version: 1.0.0
+    service: destination
+    service-name: AISP_VIM_SES-destination-service
+    service-plan: lite
+- name: AISP_VIM_SES_html_repo_host
+  type: org.cloudfoundry.managed-service
+  parameters:
+    service: html5-apps-repo
+    service-name: AISP_VIM_SES-html5-app-host-service
+    service-plan: app-host
+- name: uaa_AISP_VIM_SES
+  type: org.cloudfoundry.managed-service
+  parameters:
+    path: ./xs-security.json
+    service: xsuaa
+    service-name: AISP_VIM_SES-xsuaa-service
+    service-plan: application
+parameters:
+  deploy_mode: html5-repo
+  enable-parallel-deployments: true

@@ -1,0 +1,49 @@
+<core:FragmentDefinition xmlns="sap.m" xmlns:core="sap.ui.core">
+    <Dialog
+        title="Enter Comment"
+        draggable="true"
+        resizable="true"
+        contentWidth="400px"
+    >
+        <VBox
+            class="sapUiMediumMargin sapUiContentPadding"
+            alignItems="Stretch"
+        >
+            <!-- Icon -->
+        
+
+            <!-- Input label -->
+            <Label text="Please enter your comment:" labelFor="commentInput" required="true" />
+            
+            <!-- Input field -->
+            <TextArea
+                id="commentInput"
+                value="{commentModel>/comment}"
+                width="100%"
+                placeholder="Type your comment here..."
+                valueState="Information"
+                valueStateText="Your comment will be recorded with this action"
+                maxLength="255"
+            />
+        </VBox>
+
+        <!-- Buttons -->
+        <beginButton>
+            <Button
+                text="OK"
+                type="Emphasized"
+                press="onCommentDialogOk"
+                icon="sap-icon://accept"
+            />
+        </beginButton>
+
+        <endButton>
+            <Button
+                text="Cancel"
+                type="Reject"
+                press="onCommentDialogCancel"
+                icon="sap-icon://decline"
+            />
+        </endButton>
+    </Dialog>
+</core:FragmentDefinition>

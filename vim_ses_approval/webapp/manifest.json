@@ -1,0 +1,162 @@
+{
+    "_version": "1.65.0",
+    "sap.app": {
+        "id": "com.sesapproval.vimsesapproval",
+        "type": "application",
+        "i18n": "i18n/i18n.properties",
+        "applicationVersion": {
+            "version": "0.0.1"
+        },
+        "title": "{{appTitle}}",
+        "description": "{{appDescription}}",
+        "resources": "resources.json",
+        "sourceTemplate": {
+            "id": "@sap/generator-fiori:basic",
+            "version": "1.17.6",
+            "toolsId": "0849304d-2f69-4ce0-b168-763b3f18b93d"
+        },
+        "dataSources": {
+            "mainService": {
+                "uri": "/odata/v2/zp-aisp-sesvim-head-bndsample/",
+                "type": "OData",
+                "settings": {
+                    "annotations": [
+                        "annotation0"
+                    ],
+                    "localUri": "localService/mainService/metadata.xml",
+                    "odataVersion": "2.0"
+                }
+            },
+            "annotation0": {
+                "type": "ODataAnnotation",
+                "uri": "annotations/annotation0.xml",
+                "settings": {
+                    "localUri": "annotations/annotation0.xml"
+                }
+            }
+        }
+    },
+    "sap.ui": {
+        "technology": "UI5",
+        "icons": {
+            "icon": "",
+            "favIcon": "",
+            "phone": "",
+            "phone@2": "",
+            "tablet": "",
+            "tablet@2": ""
+        },
+        "deviceTypes": {
+            "desktop": true,
+            "tablet": true,
+            "phone": true
+        }
+    },
+    "sap.ui5": {
+        "flexEnabled": false,
+        "dependencies": {
+            "minUI5Version": "1.136.1",
+            "libs": {
+                "sap.m": {},
+                "sap.ui.core": {}
+            }
+        },
+        "contentDensities": {
+            "compact": true,
+            "cozy": true
+        },
+        "models": {
+            "i18n": {
+                "type": "sap.ui.model.resource.ResourceModel",
+                "settings": {
+                    "bundleName": "com.sesapproval.vimsesapproval.i18n.i18n"
+                }
+            },
+            "": {
+                "dataSource": "mainService",
+                "preload": true,
+                "settings": {}
+            }
+        },
+        "resources": {
+            "css": [
+                {
+                    "uri": "css/style.css"
+                }
+            ]
+        },
+        "routing": {
+            "config": {
+                "routerClass": "sap.m.routing.Router",
+                "controlAggregation": "beginColumnPages",
+                "controlId": "layout",
+                "transition": "slide",
+                "type": "View",
+                "viewType": "XML",
+                "path": "com.sesapproval.vimsesapproval.view",
+                "async": true
+            },
+            "routes": [
+                {
+                    "name": "RouteApprovalList",
+                    "pattern": ":?query:",
+                    "target": [
+                        "TargetApprovalList"
+                    ]
+                },
+                {
+                    "name": "RouteApprovalObj",
+                    "pattern": "items/{reqId}",
+                    "target": [
+                        "TargetApprovalObj"
+                    ]
+                },
+                {
+                    "name": "Invoicepdf",
+                    "pattern": "Invoicepdf/{imageUrl}",
+                    "target": [
+                        "TargetApprovalObj",
+                        "Invoicepdf"
+                    ]
+                },
+                {
+                    "name": "InvoiceLogs",    
+                    "pattern": "Invoicepdf/request/{requestNo}",
+                    "target": ["TargetApprovalObj","Invoicepdf"]
+                }
+            ],
+            "targets": {
+                "TargetApprovalList": {
+                    "id": "ApprovalList",
+                    "name": "ApprovalList",
+                    "viewLevel": 1,
+                    "clearControlAggregation": true
+                },
+                "TargetApprovalObj": {
+                    "id": "ApprovalObj",
+                    "name": "ApprovalObj",
+                    "viewLevel": 1,
+                    "clearControlAggregation": true
+                },
+
+                "Invoicepdf": {
+                    "viewId": "Invoicepdf",
+                    "viewName": "Invoicepdf",
+                    "viewLevel": 2,
+                    "clearControlAggregation": true,
+                    "controlAggregation": "midColumnPages"
+                }
+            }
+        },
+        "rootView": {
+            "viewName": "com.sesapproval.vimsesapproval.view.App",
+            "type": "XML",
+            "id": "App",
+            "async": true
+        }
+    },
+    "sap.cloud": {
+        "public": true,
+        "service": "AISP_VIM_SES"
+    }
+}

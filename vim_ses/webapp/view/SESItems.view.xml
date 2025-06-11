@@ -1,0 +1,342 @@
+<mvc:View
+    xmlns:tnt="sap.tnt"
+    controllerName="com.vimses.vimses.controller.SESItems"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns:core="sap.ui.core"
+    xmlns:m="sap.m"
+    xmlns:f="sap.f"
+    xmlns:layout="sap.ui.layout.form"
+    xmlns="sap.uxap"
+>
+    <ObjectPageLayout
+        id="ObjectPageLayout"
+        showTitleInHeaderContent="true"
+        alwaysShowContentHeader="false"
+        preserveHeaderStateOnScroll="false"
+        headerContentPinnable="true"
+        headerContentPinned="true"
+        toggleHeaderOnTitleClick="false"
+        showFooter="true"
+        isChildPage="true"
+        upperCaseAnchorBar="false"
+    >
+        <headerTitle>
+            <ObjectPageDynamicHeaderTitle>
+                <breadcrumbs>
+                    <m:Breadcrumbs
+                        id="breadcrumbsId"
+                        currentLocationText="PO Details"
+                    >
+                        <m:Link
+                            text="PO Lists"
+                            press="handleClose"
+                        />
+                    </m:Breadcrumbs>
+                </breadcrumbs>
+                <expandedHeading>
+                    <m:Title
+                        text="PO NO: {invoiceContext>/header/Ebeln}"
+                        wrapping="true"
+                    />
+                </expandedHeading>
+                <snappedHeading>
+                    <m:HBox
+                        wrap="NoWrap"
+                        alignItems="Center"
+                    >
+                        <m:Avatar
+                            src="./Images/objPageIcon.png"
+                            displaySize="S"
+                            displayShape="Square"
+                            class="sapUiTinyMarginEnd"
+                        />
+                        <m:VBox wrap="Wrap">
+                            <m:Title
+                                text="{invoiceContext>/header/Ebeln}"
+                                wrapping="true"
+                            />
+                            <m:Label
+                                text="PO NO:"
+                                wrapping="true"
+                            />
+                        </m:VBox>
+                    </m:HBox>
+                </snappedHeading>
+            </ObjectPageDynamicHeaderTitle>
+        </headerTitle>
+
+        <headerContent>
+            <!-- <m:Breadcrumbs>
+                <m:Link
+                    text="Order"
+                    press="onNavToHome"
+                />
+                <m:Link
+                    text="Create ASN"
+                    press="onNavToProducts"
+                />
+            </m:Breadcrumbs> -->
+            <m:FlexBox
+                wrap="Wrap"
+                fitContainer="true"
+                alignItems="Stretch"
+            >
+                <m:Avatar
+                    src="./Images/objPageIcon.png"
+                    displaySize="L"
+                    displayShape="Square"
+                    class="sapUiMediumMarginEnd"
+                />
+                <m:VBox class="sapUiLargeMarginEnd sapUiSmallMarginBottom">
+                    <m:HBox class="sapUiTinyMarginBottom">
+                        <m:Label
+                            text="Created By:"
+                            class="sapUiTinyMarginEnd"
+                        />
+                        <m:Text text="{invoiceContext>/header/Ernam}" />
+                    </m:HBox>
+
+                    <m:HBox
+                        class="sapUiTinyMarginBottom"
+                        renderType="Bare"
+                    >
+                        <m:Label
+                            text="Order Date:"
+                            class="sapUiTinyMarginEnd"
+                        />
+                        <m:Text
+                            text="{path: 'invoiceContext>/header/Bedat', formatter: '.formatODataDate'}"
+                        />
+                    </m:HBox>
+                </m:VBox>
+
+                <m:VBox class="sapUiLargeMarginEnd sapUiSmallMarginBottom">
+                    <m:HBox class="sapUiTinyMarginBottom">
+                        <m:Label
+                            text="Purchase Org:"
+                            class="sapUiTinyMarginEnd"
+                        />
+                        <m:Text text="{invoiceContext>/header/Ekorg}" />
+                    </m:HBox>
+
+                    <m:HBox
+                        class="sapUiTinyMarginBottom"
+                        renderType="Bare"
+                    >
+                        <m:Label
+                            text="Total Amount:"
+                            class="sapUiTinyMarginEnd"
+                        />
+                        <m:ObjectNumber
+                            number="{
+                            parts:[{path:'invoiceContext>/header/Amount'},{path:'invoiceContext>/header/Waers'}],
+                            type: 'sap.ui.model.type.Currency',
+                            formatOptions: {showMeasure: false}
+                        }"
+                            unit="{invoiceContext>/header/Waers}"
+                            state="Success"
+                        />
+                    </m:HBox>
+                </m:VBox>
+
+                <m:VBox class="sapUiLargeMarginEnd sapUiSmallMarginBottom">
+                    <m:HBox class="sapUiTinyMarginBottom">
+                        <m:Label
+                            text="Company Code:"
+                            class="sapUiTinyMarginEnd"
+                        />
+                        <m:Text text="{invoiceContext>/header/Bukrs}" />
+                    </m:HBox>
+                    <m:HBox
+                        class="sapUiTinyMarginBottom"
+                        renderType="Bare"
+                    >
+                        <m:Label
+                            text="Status:"
+                            class="sapUiTinyMarginEnd"
+                        />
+                        <m:ObjectStatus
+                            text="{invoiceContext>/header/Status}"
+                            state="Indication13"
+                        />
+                    </m:HBox>
+                </m:VBox>
+                <m:VBox class="sapUiLargeMarginEnd sapUiSmallMarginBottom" visible="{= !!${invoiceContext>/header/Lblni}}">
+                    <m:HBox
+                        class="sapUiTinyMarginBottom"
+                        renderType="Bare"
+                    >
+                        <m:Label
+                            text="Ref Invoice Number:"
+                            class="sapUiTinyMarginEnd"
+                        />
+                       <m:Text text="{invoiceContext>/header/Lblni}" />
+                    </m:HBox>
+                </m:VBox>
+            </m:FlexBox>
+        </headerContent>
+
+        <sections>
+            <ObjectPageSection
+                title="Supplier Details"
+                showTitle="false"
+                titleUppercase="false"
+            >
+                <subSections>
+                    <ObjectPageSubSection>
+                        <blocks>
+                            <layout:SimpleForm
+                                editable="false"
+                                layout="ColumnLayout"
+                                title="Supplier Details"
+                                labelSpanXL="4"
+                                labelSpanL="4"
+                                labelSpanM="12"
+                                labelSpanS="12"
+                                adjustLabelSpan="false"
+                                emptySpanXL="0"
+                                emptySpanL="0"
+                                emptySpanM="0"
+                                emptySpanS="0"
+                                columnsXL="2"
+                                columnsL="2"
+                                columnsM="2"
+                                singleContainerFullSize="false"
+                            >
+                                <layout:content>
+                                    <m:Label text="Supplier" />
+                                  <m:Text text="{= ${invoiceContext>/header/Lifnr} + ' - ' + ${invoiceContext>/header/name1} }" />
+
+                                    <m:Label text="Bank Name" />
+                                    <m:Text text="{invoiceContext>/header/Bankname}" />
+
+                                    <m:Label text="Bank Account" />
+                                    <m:Text text="{invoiceContext>/header/Bankacc}" />
+
+                                    <m:Label text="Vendor Address" />
+                                    <m:Text text="{invoiceContext>/header/Vendoraddress}" />
+                                </layout:content>
+                            </layout:SimpleForm>
+                        </blocks>
+                    </ObjectPageSubSection>
+                </subSections>
+            </ObjectPageSection>
+            <ObjectPageSection
+                title="Service Entry Sheet"
+                showTitle="false"
+                titleUppercase="false"
+            >
+                <subSections>
+                    <ObjectPageSubSection>
+                        <blocks>
+                            <m:ScrollContainer
+                                horizontal="true"
+                                vertical="true"
+                                width="100%"
+                            >
+                                <m:Table
+                                    id="sesTable"
+                                    inset="false"
+                                    mode="MultiSelect"
+                                    selectionChange=".onSesSelectionChange"
+                                    headerText="Service Entry Sheet"
+                                    items="{path: 'invoiceContext>/sesItems'}"
+                                >
+                                    <m:headerToolbar>
+                                        <m:Toolbar>
+                                            <m:Title
+                                                text="Service Entry Sheet"
+                                                level="H4"
+                                            />
+                                            <m:ToolbarSpacer />
+                                            <m:Button
+                                                id="createInvoiceBtn"
+                                                text="Create Invoice"
+                                                type="Emphasized"
+                                                icon="sap-icon://add-document"
+                                                enabled="false"
+                                                press=".onCreateInvoice"
+                                            />
+                                        </m:Toolbar>
+                                    </m:headerToolbar>
+                                    <m:columns>
+                                        <m:Column>
+                                            <m:Label
+                                                text="Service Entry Sheets"
+                                            />
+                                        </m:Column>
+                                        <m:Column>
+                                            <m:Label text="SES Date"/>
+                                        </m:Column>
+                                        <m:Column>
+                                            <m:Label text="Service Period" />
+                                        </m:Column>
+                                        <m:Column>
+                                            <m:Label text="SES Amt" />
+                                        </m:Column>
+                                        <m:Column>
+                                            <m:Label text="Invoice Status" />
+                                        </m:Column>
+                                    </m:columns>
+
+                                    <m:items>
+                                        <m:ColumnListItem
+                                            type="Active"
+                                            press=".onRowPress"
+                                        >
+                                            <m:cells>
+                                                <m:Link
+                                                    text="{invoiceContext>Lblni}"
+                                                    press="onClickServiceNum"
+                                                />
+                                                <m:Text
+                                                    text="{path: 'invoiceContext>Budat', formatter: '.formatODataDate'}"
+                                                />
+                                                <m:Text
+                                                    text="{
+                                                       parts: [
+                                                         { path: 'invoiceContext>Lzbis' },
+                                                         { path: 'invoiceContext>Lzvon' }
+                                                         ],
+                                                    formatter: '.formatServicePeriod'
+                                                    }"
+                                                />
+
+                                                <m:ObjectNumber
+                                                    number="{invoiceContext>Netwr}"
+                                                    unit="INR"
+                                                    class="noWrapText"
+                                                />
+                                                <m:ObjectStatus
+                                                    text="{invoiceContext>Status}"
+                                                    state="Indication13"
+                                                />
+                                            </m:cells>
+                                        </m:ColumnListItem>
+                                    </m:items>
+                                </m:Table>
+                            </m:ScrollContainer>
+                        </blocks>
+                    </ObjectPageSubSection>
+                </subSections>
+            </ObjectPageSection>
+        </sections>
+        <footer>
+            <m:Toolbar id="otbFooter">
+                <m:ToolbarSpacer />
+                <m:Button
+                    type="Back"
+                    text="Cancel"
+                    press="handleClose"
+                />
+                <!-- <m:Button
+                    type="Success"
+                    icon="sap-icon://complete"
+                    text="Submit"
+                    press="onSubmitPo"
+                    visible="{= ${invoiceContext>/header/Status} !== 'In Process' }"
+                /> -->
+            </m:Toolbar>
+        </footer>
+    </ObjectPageLayout>
+</mvc:View>

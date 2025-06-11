@@ -1,0 +1,259 @@
+<mvc:View
+    controllerName="com.vimses.vimses.controller.SESPOList"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns:smartFilterBar="sap.ui.comp.smartfilterbar"
+    xmlns:smartTable="sap.ui.comp.smarttable"
+    xmlns:f="sap.f"
+    xmlns:core="sap.ui.core"
+    xmlns="sap.m"
+>
+    <Page
+        id="page"
+        title="{i18n>title}"
+        titleLevel="H1"
+        navButtonPress="pressBack"
+        showHeader="false"
+    >
+    
+        <smartFilterBar:SmartFilterBar
+            id="smartFilterBar"
+            entitySet="SES_VIM_HEAD_API"
+            persistencyKey="SmartFilter_Explored"
+        >
+            <smartFilterBar:controlConfiguration>
+                <smartFilterBar:ControlConfiguration
+                    key="Bedat"
+                    label="Order Date"
+                    visibleInAdvancedArea="true"
+                    conditionType="{
+								module: 'sap.ui.comp.config.condition.DateRangeType'
+							}"
+                />
+            </smartFilterBar:controlConfiguration>
+        </smartFilterBar:SmartFilterBar>
+
+        <IconTabBar
+            id="idIconTabBarMulti"
+            expanded="{device>/isNoPhone}"
+            class="customTabBar"
+            select="onTabSelect"
+        >
+            <items>
+                <IconTabFilter
+                    key="pending"
+                    icon="./Images/pending.png"
+                    text="Open PO"
+                >
+                    <smartTable:SmartTable
+                        entitySet="SES_VIM_HEAD_API"
+                        smartFilterId="smartFilterBar"
+                        enableExport="true"
+                        beforeExport="onBeforeExport"
+                        useVariantManagement="true"
+                        useTablePersonalisation="true"
+                        header="Pending Orders"
+                        showRowCount="true"
+                        persistencyKey="SmartTableRefApp_Explored"
+                        enableAutoBinding="true"
+                        tableType="ResponsiveTable"
+                        demandPopin="true"
+                        enableAutoColumnWidth="true"
+                        id="idSmartTablePend"
+                    >
+                        <Table
+                            selectionChange="selectionChangeHandlerRregister"
+                            growing="true"
+                            growingThreshold="10"
+                        >
+                            <columns>
+                                <Column>
+                                    <customData>
+                                        <core:CustomData
+                                            key="p13nData"
+                                            value='\{"columnKey": "Ebeln","leadingProperty": "Ebeln", "sortProperty": "Ebeln", "filterProperty": "Ebeln", "columnIndex": "0" }'
+                                        />
+                                    </customData>
+                                    <Label
+                                        text="PO Number"
+                                        wrapping="true"
+                                    />
+                                </Column>
+                                <Column>
+                                    <customData>
+                                        <core:CustomData
+                                            key="p13nData"
+                                            value='\{"columnKey": "Status","leadingProperty": "Status", "sortProperty": "Status", "filterProperty": "Status", "columnIndex": "5" }'
+                                        />
+                                    </customData>
+                                    <Label
+                                        text="Status"
+                                        wrapping="true"
+                                    />
+                                </Column>
+                                <Column>
+                                    <customData>
+                                        <core:CustomData
+                                            key="p13nData"
+                                            value='\{"columnKey": "Bedat","leadingProperty": "Bedat", "sortProperty": "Bedat", "filterProperty": "Bedat", "columnIndex": "1" }'
+                                        />
+                                    </customData>
+                                    <Label
+                                        text="Order Date"
+                                        wrapping="true"
+                                    />
+                                </Column>
+                                <Column>
+                                    <customData>
+                                        <core:CustomData
+                                            key="p13nData"
+                                            value='\{"columnKey": "Amount","leadingProperty": "Amount", "sortProperty": "Amount", "filterProperty": "Amount", "columnIndex": "2" }'
+                                        />
+                                    </customData>
+                                    <Label
+                                        text="Amount"
+                                        wrapping="true"
+                                    />
+                                </Column>
+                            </columns>
+                            <items>
+                                <ColumnListItem
+                                    vAlign="Middle"
+                                    type="Navigation"
+                                    press="onClickofPONumber"
+                                >
+                                    <cells>
+                                        <Link
+                                            text="{Ebeln}"
+                                            press="onClickofPONumber"
+                                        />
+                                        <ObjectStatus
+                                            text="{path: 'Status', formatter: '.statusTextFormat'}"
+                                            state="{path: 'Status', formatter: '.statusStateFormat'}"
+                                            inverted="true"
+                                            class="noWrapText"
+                                        />
+
+                                        <Text
+                                            text="{path: 'Bedat', formatter: '.formatODataDate'}"
+                                        />
+                                        <ObjectNumber
+                                            number="{Amount}"
+                                            unit="INR"
+                                        />
+                                    </cells>
+                                </ColumnListItem>
+                            </items>
+                        </Table>
+                    </smartTable:SmartTable>
+                </IconTabFilter>
+
+                <IconTabFilter
+                    key="invoices"
+                    icon="./Images/inprogress.png"
+                    text="Invoices"
+                >
+                    <smartTable:SmartTable
+                        entitySet="SESVimHead"
+                        id="idSmartTableInv"
+                        smartFilterId="smartFilterBar"
+                        enableExport="true"
+                        beforeExport="onBeforeExport"
+                        useVariantManagement="true"
+                        useTablePersonalisation="true"
+                        header="Pending Orders"
+                        showRowCount="true"
+                        persistencyKey="SmartTableRefApp_Explored"
+                        enableAutoBinding="true"
+                        class="sapUiResponsiveContentPadding"
+                        tableType="ResponsiveTable"
+                        demandPopin="true"
+                        enableAutoColumnWidth="true"
+                    >
+                        <Table
+                            selectionChange="selectionChangeHandlerRregister"
+                            growing="true"
+                            growingThreshold="10"
+                        >
+                            <columns>
+                                <Column>
+                                    <customData>
+                                        <core:CustomData
+                                            key="p13nData"
+                                            value='\{"columnKey": "PO_NUMBER","leadingProperty": "PO_NUMBER", "sortProperty": "PO_NUMBER", "filterProperty": "PO_NUMBER", "columnIndex": "0" }'
+                                        />
+                                    </customData>
+                                    <Label
+                                        text="PO Number"
+                                        wrapping="true"
+                                    />
+                                </Column>
+                                <Column>
+                                    <customData>
+                                        <core:CustomData
+                                            key="p13nData"
+                                            value='\{"columnKey": "Status","leadingProperty": "Status", "sortProperty": "Status", "filterProperty": "Status", "columnIndex": "5" }'
+                                        />
+                                    </customData>
+                                    <Label
+                                        text="Status"
+                                        wrapping="true"
+                                    />
+                                </Column>
+                                <Column>
+                                    <customData>
+                                        <core:CustomData
+                                            key="p13nData"
+                                            value='\{"columnKey": "Bedat","leadingProperty": "Bedat", "sortProperty": "Bedat", "filterProperty": "Bedat", "columnIndex": "1" }'
+                                        />
+                                    </customData>
+                                    <Label
+                                        text="Invoice Date"
+                                        wrapping="true"
+                                    />
+                                </Column>
+                                <Column>
+                                    <customData>
+                                        <core:CustomData
+                                            key="p13nData"
+                                            value='\{"columnKey": "Amount","leadingProperty": "Amount", "sortProperty": "Amount", "filterProperty": "Amount", "columnIndex": "2" }'
+                                        />
+                                    </customData>
+                                    <Label
+                                        text="Amount"
+                                        wrapping="true"
+                                    />
+                                </Column>
+                            </columns>
+                            <items>
+                                <ColumnListItem
+                                    vAlign="Middle"
+                                    type="Navigation"
+                                    press="onClickofReqNum"
+                                >
+                                    <cells>
+                                        <Link
+                                            text="{PO_NUMBER}"
+                                            press="onClickofPONumber"
+                                        />
+                                        <ObjectStatus
+                                            text="{path: 'VENDOR_STATUS', formatter: '.statusTextFormat'}"
+                                            state="{path: 'VENDOR_STATUS', formatter: '.statusStateFormat'}"
+                                            inverted="true"
+                                            class="noWrapText"
+                                        />
+
+                                        <Text
+                                            text="{INVOICE_DATE}"
+                                        />
+                                      <Text text="{INVOICE_NUMBER}"></Text>
+                                     
+                                    </cells>
+                                </ColumnListItem>
+                            </items>
+                        </Table>
+                    </smartTable:SmartTable>
+                </IconTabFilter>
+            </items>
+        </IconTabBar>
+    </Page>
+</mvc:View>

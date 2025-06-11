@@ -1,0 +1,20 @@
+/* Enter your custom styles here */
+/* Enter your custom styles here */
+.noWrapText {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.customTabBar .sapMITBFilter.sapMITBSelected {
+    border-bottom: 3px solid #0070f2;
+    /* Your highlight color */
+    border-radius: 0;
+    background: none !important;
+    color: inherit !important;
+}
+
+/* Optional: Adjust spacing */
+.customTabBar .sapMITBFilter {
+    padding-bottom: 6px;
+}

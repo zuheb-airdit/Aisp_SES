@@ -1,0 +1,74 @@
+<core:FragmentDefinition
+    xmlns="sap.m"
+    xmlns:core="sap.ui.core"
+>
+    <Dialog
+        title="SERVICE ENTRY SHEET NO : {serviceDetails>/Packno}"
+        contentWidth="1000px"
+        class="sapUiResponsivePadding--header sapUiResponsivePadding--content sapUiResponsivePadding--footer"
+        draggable="true"
+        resizable="true"
+    >
+        <VBox>
+
+            <Table
+                items="{serviceDetails>/items}"
+                inset="false"
+                fixedLayout="false"
+            >
+                <columns>
+                    <Column>
+                        <Label text="Service No" />
+                    </Column>
+                    <Column>
+                        <Label text="Service Description" />
+                    </Column>
+                    <Column>
+                        <Label text="UOM" />
+                    </Column>
+                    <Column>
+                        <Label text="Unit Price" />
+                    </Column>
+                    <Column>
+                        <Label text="Serviced Quantity" />
+                    </Column>
+                    <Column>
+                        <Label text="Total Price" />
+                    </Column>
+                </columns>
+
+                <items>
+                    <ColumnListItem>
+                        <cells>
+                            <!-- ✅ S.No -->
+                            <Text text="{serviceDetails>SERVICE_NO}" />
+                            <Text text="{serviceDetails>SERVICE_DESCRIPTION}" />
+                            <Text text="{serviceDetails>UNIT_OF_MEASURE}" />
+                            <Text text="{serviceDetails>UNIT_PRICE}" />
+                            <Text text="{serviceDetails>SERVICED_QUANTITY}" />
+                            <Text text="{serviceDetails>TOTAL_PRICE}" />
+                        </cells>
+                    </ColumnListItem>
+                </items>
+            </Table>
+
+            <HBox
+                justifyContent="End"
+                class="sapUiTinyMarginTop"
+            >
+                <Text text="Total Service Sheet Value:" />
+                <Text
+                    text="{path: 'serviceDetails>/items', formatter: '.getTotalServiceAmount'}"
+                    class="sapUiSmallMarginBegin"
+                />
+            </HBox>
+        </VBox>
+
+        <endButton>
+            <Button
+                text="Close"
+                press="onCloseSesDetailsDialog"
+            />
+        </endButton>
+    </Dialog>
+</core:FragmentDefinition>

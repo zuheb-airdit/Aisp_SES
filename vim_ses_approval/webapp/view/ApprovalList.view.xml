@@ -1,0 +1,406 @@
+<mvc:View
+    controllerName="com.sesapproval.vimsesapproval.controller.ApprovalList"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns:smartFilterBar="sap.ui.comp.smartfilterbar"
+    xmlns:smartTable="sap.ui.comp.smarttable"
+    xmlns:f="sap.f"
+    xmlns:core="sap.ui.core"
+    xmlns="sap.m"
+>
+    <Page>
+        <smartFilterBar:SmartFilterBar
+            id="smartFilterBar"
+            entitySet="SES_VIM_HEAD_API"
+            persistencyKey="SmartFilter_Explored"
+        >
+            <smartFilterBar:controlConfiguration>
+                <smartFilterBar:ControlConfiguration
+                    key="Bedat"
+                    label="Order Date"
+                    visibleInAdvancedArea="true"
+                    conditionType="{
+								module: 'sap.ui.comp.config.condition.DateRangeType'
+							}"
+                />
+            </smartFilterBar:controlConfiguration>
+        </smartFilterBar:SmartFilterBar>
+
+        <IconTabBar
+            id="idIconTabBarMulti"
+            expanded="{device>/isNoPhone}"
+            class="customTabBar"
+            select="onTabSelect"
+        >
+            <items>
+                <IconTabFilter
+                    key="pending"
+                    icon="./Images/pending.png"
+                    text="Pending"
+                >
+                    <smartTable:SmartTable
+                        entitySet="PENDING_TAB"
+                        smartFilterId="smartFilterBar"
+                        enableExport="true"
+                        beforeExport="onBeforeExport"
+                        useVariantManagement="true"
+                        useTablePersonalisation="true"
+                        header="Pending Orders"
+                        showRowCount="true"
+                        persistencyKey="SmartTableRefApp_Explored"
+                        enableAutoBinding="true"
+                        tableType="ResponsiveTable"
+                        demandPopin="true"
+                        enableAutoColumnWidth="true"
+                        id="idSmartTablePend"
+                    >
+                        <Table
+                            selectionChange="selectionChangeHandlerRregister"
+                            growing="true"
+                            growingThreshold="10"
+                        >
+                            <columns>
+                            <Column>
+                                    <customData>
+                                        <core:CustomData
+                                            key="p13nData"
+                                            value='\{"columnKey": "REQUEST_NO","leadingProperty": "REQUEST_NO", "sortProperty": "REQUEST_NO", "filterProperty": "REQUEST_NO", "columnIndex": "0" }'
+                                        />
+                                    </customData>
+                                    <Label
+                                        text="Request Number"
+                                        wrapping="true"
+                                    />
+                                </Column>
+                                <Column>
+                                    <customData>
+                                        <core:CustomData
+                                            key="p13nData"
+                                            value='\{"columnKey": "INVOICE_NUMBER","leadingProperty": "INVOICE_NUMBER", "sortProperty": "INVOICE_NUMBER", "filterProperty": "INVOICE_NUMBER", "columnIndex": "1" }'
+                                        />
+                                    </customData>
+                                    <Label
+                                        text="Invoice Number"
+                                        wrapping="true"
+                                    />
+                                </Column>
+                                <Column>
+                                    <customData>
+                                        <core:CustomData
+                                            key="p13nData"
+                                            value='\{"columnKey": "PO_NUMBER","leadingProperty": "PO_NUMBER", "sortProperty": "PO_NUMBER", "filterProperty": "PO_NUMBER", "columnIndex": "2" }'
+                                        />
+                                    </customData>
+                                    <Label
+                                        text="PO Number"
+                                        wrapping="true"
+                                    />
+                                </Column>
+                                <Column>
+                                    <customData>
+                                        <core:CustomData
+                                            key="p13nData"
+                                            value='\{"columnKey": "CREATED_ON","leadingProperty": "CREATED_ON", "sortProperty": "CREATED_ON", "filterProperty": "CREATED_ON", "columnIndex": "3" }'
+                                        />
+                                    </customData>
+                                    <Label
+                                        text="Created On"
+                                        wrapping="true"
+                                    />
+                                </Column>
+                                <Column>
+                                    <customData>
+                                        <core:CustomData
+                                            key="p13nData"
+                                            value='\{"columnKey": "STATUS_DESC","leadingProperty": "STATUS_DESC", "sortProperty": "STATUS_DESC", "filterProperty": "STATUS_DESC", "columnIndex": "4" }'
+                                        />
+                                    </customData>
+                                    <Label
+                                        text="Status"
+                                        wrapping="true"
+                                    />
+                                </Column>
+                            </columns>
+
+                            <items>
+                                <ColumnListItem
+                                    vAlign="Middle"
+                                    type="Navigation"
+                                    press="onClickofPONumber"
+                                >
+                                    <cells>
+                                     <Text text="{REQUEST_NO}" />                                
+                                       <Link
+                                            text="{INVOICE_NUMBER}"
+                                            press="onClickofPONumber"
+                                        />
+                                        <Text text="{PO_NUMBER}" />
+                                        <Text
+                                            text="{path: 'CREATED_ON', formatter: '.formatODataDate'}"
+                                        />
+                                        <ObjectStatus
+                                            text="{path: 'STATUS_DESC', formatter: '.statusTextFormat'}"
+                                            state="{path: 'STATUS_DESC', formatter: '.aStatusStateFormat'}"
+                                            inverted="true"
+                                            class="noWrapText"
+                                        />
+                                    </cells>
+                                </ColumnListItem>
+                            </items>
+                        </Table>
+                    </smartTable:SmartTable>
+                </IconTabFilter>
+
+                <IconTabFilter
+                    key="invoices"
+                    icon="./Images/inprogress.png"
+                    text="Approved"
+                >
+                    <smartTable:SmartTable
+                        entitySet="APPROVED_TAB"
+                        id="idSmartTableInv"
+                        smartFilterId="smartFilterBar"
+                        enableExport="true"
+                        beforeExport="onBeforeExport"
+                        useVariantManagement="true"
+                        useTablePersonalisation="true"
+                        header="Pending Orders"
+                        showRowCount="true"
+                        persistencyKey="SmartTableRefApp_Explored"
+                        enableAutoBinding="true"
+                        class="sapUiResponsiveContentPadding"
+                        tableType="ResponsiveTable"
+                        demandPopin="true"
+                        enableAutoColumnWidth="true"
+                    >
+                        <Table
+                            selectionChange="selectionChangeHandlerRregister"
+                            growing="true"
+                            growingThreshold="10"
+                        >
+                            <columns>
+                           <Column>
+                                    <customData>
+                                        <core:CustomData
+                                            key="p13nData"
+                                            value='\{"columnKey": "REQUEST_NO","leadingProperty": "REQUEST_NO", "sortProperty": "REQUEST_NO", "filterProperty": "REQUEST_NO", "columnIndex": "0" }'
+                                        />
+                                    </customData>
+                                    <Label
+                                        text="Request Number"
+                                        wrapping="true"
+                                    />
+                                </Column>
+                                <Column>
+                                    <customData>
+                                        <core:CustomData
+                                            key="p13nData"
+                                            value='\{"columnKey": "INVOICE_NUMBER","leadingProperty": "INVOICE_NUMBER", "sortProperty": "INVOICE_NUMBER", "filterProperty": "INVOICE_NUMBER", "columnIndex": "1" }'
+                                        />
+                                    </customData>
+                                    <Label
+                                        text="Invoice Number"
+                                        wrapping="true"
+                                    />
+                                </Column>
+                                <Column>
+                                    <customData>
+                                        <core:CustomData
+                                            key="p13nData"
+                                            value='\{"columnKey": "PO_NUMBER","leadingProperty": "PO_NUMBER", "sortProperty": "PO_NUMBER", "filterProperty": "PO_NUMBER", "columnIndex": "2" }'
+                                        />
+                                    </customData>
+                                    <Label
+                                        text="PO Number"
+                                        wrapping="true"
+                                    />
+                                </Column>
+                                <Column>
+                                    <customData>
+                                        <core:CustomData
+                                            key="p13nData"
+                                            value='\{"columnKey": "CREATED_ON","leadingProperty": "CREATED_ON", "sortProperty": "CREATED_ON", "filterProperty": "CREATED_ON", "columnIndex": "3" }'
+                                        />
+                                    </customData>
+                                    <Label
+                                        text="Created On"
+                                        wrapping="true"
+                                    />
+                                </Column>
+                                 <Column>
+                                    <customData>
+                                        <core:CustomData
+                                            key="p13nData"
+                                            value='\{"columnKey": "SAP_INVOICE_NUMBER","leadingProperty": "SAP_INVOICE_NUMBER", "sortProperty": "SAP_INVOICE_NUMBER", "filterProperty": "SAP_INVOICE_NUMBER", "columnIndex": "4" }'
+                                        />
+                                    </customData>
+                                    <Label
+                                        text="Invoice Ref Number"
+                                        wrapping="true"
+                                    />
+                                </Column>
+                                <Column>
+                                    <customData>
+                                        <core:CustomData
+                                            key="p13nData"
+                                            value='\{"columnKey": "STATUS_DESC","leadingProperty": "STATUS_DESC", "sortProperty": "STATUS_DESC", "filterProperty": "STATUS_DESC", "columnIndex": "5" }'
+                                        />
+                                    </customData>
+                                    <Label
+                                        text="Status"
+                                        wrapping="true"
+                                    />
+                                </Column>
+                            </columns>
+
+                            <items>
+                                <ColumnListItem
+                                    vAlign="Middle"
+                                    type="Navigation"
+                                    press="onClickofPONumber"
+                                >
+                                    <cells>
+                                    <Text text="{REQUEST_NO}" />
+                                        <Link
+                                            text="{INVOICE_NUMBER}"
+                                            press="onClickofPONumber"
+                                        />
+                                        <Text text="{PO_NUMBER}" />
+                                        <Text
+                                            text="{path: 'CREATED_ON', formatter: '.formatODataDate'}"
+                                        />
+                                        <Text text="{SAP_INVOICE_NUMBER}" />
+                                        <ObjectStatus
+                                            text="{path: 'STATUS_DESC', formatter: '.statusTextFormat'}"
+                                            state="{path: 'STATUS_DESC', formatter: '.statusStateFormat'}"
+                                            inverted="true"
+                                            class="noWrapText"
+                                        />
+                                    </cells>
+                                </ColumnListItem>
+                            </items>
+                        </Table>
+                    </smartTable:SmartTable>
+                </IconTabFilter>
+
+                <IconTabFilter
+                    key="invoices"
+                    icon="./Images/inprogress.png"
+                    text="Rejected"
+                >
+                    <smartTable:SmartTable
+                        entitySet="REJECTED_TAB"
+                        id="idSmartTableREJ"
+                        smartFilterId="smartFilterBar"
+                        enableExport="true"
+                        beforeExport="onBeforeExport"
+                        useVariantManagement="true"
+                        useTablePersonalisation="true"
+                        header="Pending Orders"
+                        showRowCount="true"
+                        persistencyKey="SmartTableRefApp_Explored"
+                        enableAutoBinding="true"
+                        class="sapUiResponsiveContentPadding"
+                        tableType="ResponsiveTable"
+                        demandPopin="true"
+                        enableAutoColumnWidth="true"
+                    >
+                        <Table
+                            selectionChange="selectionChangeHandlerRregister"
+                            growing="true"
+                            growingThreshold="10"
+                        >
+                            <columns>
+                            <Column>
+                                    <customData>
+                                        <core:CustomData
+                                            key="p13nData"
+                                            value='\{"columnKey": "REQUEST_NO","leadingProperty": "REQUEST_NO", "sortProperty": "REQUEST_NO", "filterProperty": "REQUEST_NO", "columnIndex": "0" }'
+                                        />
+                                    </customData>
+                                    <Label
+                                        text="Request Number"
+                                        wrapping="true"
+                                    />
+                                </Column>
+                                <Column>
+                                    <customData>
+                                        <core:CustomData
+                                            key="p13nData"
+                                            value='\{"columnKey": "INVOICE_NUMBER","leadingProperty": "INVOICE_NUMBER", "sortProperty": "INVOICE_NUMBER", "filterProperty": "INVOICE_NUMBER", "columnIndex": "1" }'
+                                        />
+                                    </customData>
+                                    <Label
+                                        text="Invoice Number"
+                                        wrapping="true"
+                                    />
+                                </Column>
+                                <Column>
+                                    <customData>
+                                        <core:CustomData
+                                            key="p13nData"
+                                            value='\{"columnKey": "PO_NUMBER","leadingProperty": "PO_NUMBER", "sortProperty": "PO_NUMBER", "filterProperty": "PO_NUMBER", "columnIndex": "2" }'
+                                        />
+                                    </customData>
+                                    <Label
+                                        text="PO Number"
+                                        wrapping="true"
+                                    />
+                                </Column>
+                                <Column>
+                                    <customData>
+                                        <core:CustomData
+                                            key="p13nData"
+                                            value='\{"columnKey": "CREATED_ON","leadingProperty": "CREATED_ON", "sortProperty": "CREATED_ON", "filterProperty": "CREATED_ON", "columnIndex": "3" }'
+                                        />
+                                    </customData>
+                                    <Label
+                                        text="Created On"
+                                        wrapping="true"
+                                    />
+                                </Column>
+                                <Column>
+                                    <customData>
+                                        <core:CustomData
+                                            key="p13nData"
+                                            value='\{"columnKey": "STATUS_DESC","leadingProperty": "STATUS_DESC", "sortProperty": "STATUS_DESC", "filterProperty": "STATUS_DESC", "columnIndex": "4" }'
+                                        />
+                                    </customData>
+                                    <Label
+                                        text="Status"
+                                        wrapping="true"
+                                    />
+                                </Column>
+                            </columns>
+
+                            <items>
+                                <ColumnListItem
+                                    vAlign="Middle"
+                                    type="Navigation"
+                                    press="onClickofPONumber"
+                                >
+                                    <cells>
+                                    <Text text="{REQUEST_NO}" />
+                                        <Link
+                                            text="{INVOICE_NUMBER}"
+                                            press="onClickofPONumber"
+                                        />
+                                        <Text text="{PO_NUMBER}" />
+                                        <Text
+                                            text="{path: 'CREATED_ON', formatter: '.formatODataDate'}"
+                                        />
+                                        <ObjectStatus
+                                            text="{path: 'STATUS_DESC', formatter: '.statusTextFormat'}"
+                                            state="{path: 'STATUS_DESC', formatter: '.statusStateFormat'}"
+                                            inverted="true"
+                                            class="noWrapText"
+                                        />
+                                    </cells>
+                                </ColumnListItem>
+                            </items>
+                        </Table>
+                    </smartTable:SmartTable>
+                </IconTabFilter>
+            </items>
+        </IconTabBar>
+    </Page>
+</mvc:View>
