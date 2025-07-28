@@ -5,22 +5,33 @@ sap.ui.define([
 
     return Controller.extend("com.sesapproval.vimsesapproval.controller.ApprovalList", {
         onInit() {
+            this.byId("smartFilterBar").setEntitySet("PENDING_TAB");
+            // let oRouter = sap.ui.core.UIComponent.getRouterFor(this);
+            // oRouter.getRoute("RouteApprovalList").attachPatternMatched(this._onObjectMatchedList, this);
         },
-        onTabSelect: function(oEvent) {
+
+        // _onObjectMatchedList: function(){
+        //     this.byId("smartFilterBar").setEntitySet("PENDING_TAB");
+        // },
+
+        onTabSelect: function (oEvent) {
             const sSelectedKey = oEvent.getParameter("key");
             let oSmartTable;
-            switch(sSelectedKey) {
+            switch (sSelectedKey) {
                 case "pending":
                     oSmartTable = this.byId("idSmartTablePend");
                     break;
                 case "invoices":
                     oSmartTable = this.byId("idSmartTableInv");
+                    this.byId("smartFilterBar").setEntitySet("APPROVED_TAB");
                     break;
                 case "rejected":
                     oSmartTable = this.byId("idSmartTableREJ");
+                    this.byId("smartFilterBar").setEntitySet("REJECTED_TAB");
+
                     break;
             }
-            
+
             if (oSmartTable) {
                 try {
                     oSmartTable.setBusy(true);

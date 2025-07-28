@@ -1,8 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <edmx:Edmx Version="1.0" xmlns:edmx="http://schemas.microsoft.com/ado/2007/06/edmx" xmlns:m="http://schemas.microsoft.com/ado/2007/08/dataservices/metadata" xmlns:sap="http://www.sap.com/Protocols/SAPData">
-    <edmx:Reference Uri="https://oasis-tcs.github.io/odata-vocabularies/vocabularies/Org.OData.Capabilities.V1.xml" xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx">
-        <edmx:Include Alias="Capabilities" Namespace="Org.OData.Capabilities.V1"/>
-    </edmx:Reference>
     <edmx:Reference Uri="https://sap.github.io/odata-vocabularies/vocabularies/Common.xml" xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx">
         <edmx:Include Alias="Common" Namespace="com.sap.vocabularies.Common.v1"/>
     </edmx:Reference>
@@ -10,392 +7,84 @@
         <edmx:Include Alias="Core" Namespace="Org.OData.Core.V1"/>
     </edmx:Reference>
     <edmx:DataServices m:DataServiceVersion="2.0">
-        <Schema Namespace="ZP_AISP_SESVIM_HEAD_BNDSampleService" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
+        <Schema Namespace="SESVIM_CUSTOMER_SIDE" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
             <EntityContainer Name="EntityContainer" m:IsDefaultEntityContainer="true">
-                <EntitySet Name="ZI_AISP_SESVIM_DETAILS" EntityType="ZP_AISP_SESVIM_HEAD_BNDSampleService.ZI_AISP_SESVIM_DETAILS" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:label="For getting SES Details."/>
-                <EntitySet Name="ZP_AISP_SESVIM_HEAD" EntityType="ZP_AISP_SESVIM_HEAD_BNDSampleService.ZP_AISP_SESVIM_HEAD" sap:deletable-path="Delete_mc" sap:updatable-path="Update_mc" sap:label="Projection view for Service Entry Sheet based Invoice Head"/>
-                <EntitySet Name="ZP_AISP_SESVIM_ITEM" EntityType="ZP_AISP_SESVIM_HEAD_BNDSampleService.ZP_AISP_SESVIM_ITEM" sap:deletable-path="Delete_mc" sap:updatable-path="Update_mc" sap:label="Projection view for Service Entry Sheet based Invoice Item"/>
-                <EntitySet Name="SES_VIM_HEAD_API" EntityType="ZP_AISP_SESVIM_HEAD_BNDSampleService.SES_VIM_HEAD_API"/>
-                <EntitySet Name="SES_VIM_ITEM_API" EntityType="ZP_AISP_SESVIM_HEAD_BNDSampleService.SES_VIM_ITEM_API"/>
-                <EntitySet Name="SES_VIM_DETAILS_API" EntityType="ZP_AISP_SESVIM_HEAD_BNDSampleService.SES_VIM_DETAILS_API"/>
-                <EntitySet Name="REJECTED_TAB" EntityType="ZP_AISP_SESVIM_HEAD_BNDSampleService.REJECTED_TAB"/>
-                <EntitySet Name="PENDING_TAB" EntityType="ZP_AISP_SESVIM_HEAD_BNDSampleService.PENDING_TAB"/>
-                <EntitySet Name="APPROVED_TAB" EntityType="ZP_AISP_SESVIM_HEAD_BNDSampleService.APPROVED_TAB"/>
-                <EntitySet Name="SESVimHead" EntityType="ZP_AISP_SESVIM_HEAD_BNDSampleService.SESVimHead"/>
-                <EntitySet Name="SESVimItem" EntityType="ZP_AISP_SESVIM_HEAD_BNDSampleService.SESVimItem"/>
-                <EntitySet Name="SESDetails" EntityType="ZP_AISP_SESVIM_HEAD_BNDSampleService.SESDetails"/>
-                <EntitySet Name="SESVimAttachments" EntityType="ZP_AISP_SESVIM_HEAD_BNDSampleService.SESVimAttachments"/>
+                <EntitySet Name="STATUS_FOR_VIM" EntityType="SESVIM_CUSTOMER_SIDE.STATUS_FOR_VIM"/>
+                <EntitySet Name="VENDOE_CODE" EntityType="SESVIM_CUSTOMER_SIDE.VENDOE_CODE"/>
+                <EntitySet Name="COMPANY_CODE" EntityType="SESVIM_CUSTOMER_SIDE.COMPANY_CODE"/>
+                <EntitySet Name="REJECTED_TAB" EntityType="SESVIM_CUSTOMER_SIDE.REJECTED_TAB"/>
+                <EntitySet Name="PENDING_TAB" EntityType="SESVIM_CUSTOMER_SIDE.PENDING_TAB"/>
+                <EntitySet Name="APPROVED_TAB" EntityType="SESVIM_CUSTOMER_SIDE.APPROVED_TAB"/>
+                <EntitySet Name="SESVimHead" EntityType="SESVIM_CUSTOMER_SIDE.SESVimHead"/>
+                <EntitySet Name="SESVimItem" EntityType="SESVIM_CUSTOMER_SIDE.SESVimItem"/>
+                <EntitySet Name="SESDetails" EntityType="SESVIM_CUSTOMER_SIDE.SESDetails"/>
+                <EntitySet Name="SESVimAttachments" EntityType="SESVIM_CUSTOMER_SIDE.SESVimAttachments"/>
+                <EntitySet Name="SES_VIM_APPROVAL_LOGS" EntityType="SESVIM_CUSTOMER_SIDE.SES_VIM_APPROVAL_LOGS"/>
                 <FunctionImport Name="PostSESData" ReturnType="Edm.String" m:HttpMethod="POST">
                     <Parameter Name="action" Type="Edm.String" Mode="In" Nullable="true"/>
                     <Parameter Name="REQUEST_NO" Type="Edm.Int32" Mode="In" Nullable="true"/>
-                    <Parameter Name="SESHead" Type="Collection(ZP_AISP_SESVIM_HEAD_BNDSampleService.SESVimHead)" Nullable="false" Mode="In"/>
-                    <Parameter Name="SESItems" Type="Collection(ZP_AISP_SESVIM_HEAD_BNDSampleService.SESVimItem)" Nullable="false" Mode="In"/>
-                    <Parameter Name="SESDetails" Type="Collection(ZP_AISP_SESVIM_HEAD_BNDSampleService.SESDetails)" Nullable="false" Mode="In"/>
-                    <Parameter Name="SESAttachments" Type="Collection(ZP_AISP_SESVIM_HEAD_BNDSampleService.SESVimAttachments)" Nullable="false" Mode="In"/>
+                    <Parameter Name="SESHead" Type="Collection(SESVIM_CUSTOMER_SIDE.SESVimHead)" Nullable="false" Mode="In"/>
+                    <Parameter Name="SESItems" Type="Collection(SESVIM_CUSTOMER_SIDE.SESVimItem)" Nullable="false" Mode="In"/>
+                    <Parameter Name="SESDetails" Type="Collection(SESVIM_CUSTOMER_SIDE.SESDetails)" Nullable="false" Mode="In"/>
+                    <Parameter Name="SESAttachments" Type="Collection(SESVIM_CUSTOMER_SIDE.SESVimAttachments)" Nullable="false" Mode="In"/>
                 </FunctionImport>
-                <AssociationSet Name="REJECTED_TAB_TO_SES_VIM_ITEMS" Association="ZP_AISP_SESVIM_HEAD_BNDSampleService.REJECTED_TAB_TO_SES_VIM_ITEMS">
+                <AssociationSet Name="REJECTED_TAB_TO_SES_VIM_ITEMS" Association="SESVIM_CUSTOMER_SIDE.REJECTED_TAB_TO_SES_VIM_ITEMS">
                     <End Role="REJECTED_TAB" EntitySet="REJECTED_TAB"/>
                     <End Role="SESVimItem" EntitySet="SESVimItem"/>
                 </AssociationSet>
-                <AssociationSet Name="REJECTED_TAB_TO_SES_VIM_ATTACHMENTS" Association="ZP_AISP_SESVIM_HEAD_BNDSampleService.REJECTED_TAB_TO_SES_VIM_ATTACHMENTS">
+                <AssociationSet Name="REJECTED_TAB_TO_SES_VIM_ATTACHMENTS" Association="SESVIM_CUSTOMER_SIDE.REJECTED_TAB_TO_SES_VIM_ATTACHMENTS">
                     <End Role="REJECTED_TAB" EntitySet="REJECTED_TAB"/>
                     <End Role="SESVimAttachments" EntitySet="SESVimAttachments"/>
                 </AssociationSet>
-                <AssociationSet Name="PENDING_TAB_TO_SES_VIM_ITEMS" Association="ZP_AISP_SESVIM_HEAD_BNDSampleService.PENDING_TAB_TO_SES_VIM_ITEMS">
+                <AssociationSet Name="PENDING_TAB_TO_SES_VIM_ITEMS" Association="SESVIM_CUSTOMER_SIDE.PENDING_TAB_TO_SES_VIM_ITEMS">
                     <End Role="PENDING_TAB" EntitySet="PENDING_TAB"/>
                     <End Role="SESVimItem" EntitySet="SESVimItem"/>
                 </AssociationSet>
-                <AssociationSet Name="PENDING_TAB_TO_SES_VIM_ATTACHMENTS" Association="ZP_AISP_SESVIM_HEAD_BNDSampleService.PENDING_TAB_TO_SES_VIM_ATTACHMENTS">
+                <AssociationSet Name="PENDING_TAB_TO_SES_VIM_ATTACHMENTS" Association="SESVIM_CUSTOMER_SIDE.PENDING_TAB_TO_SES_VIM_ATTACHMENTS">
                     <End Role="PENDING_TAB" EntitySet="PENDING_TAB"/>
                     <End Role="SESVimAttachments" EntitySet="SESVimAttachments"/>
                 </AssociationSet>
-                <AssociationSet Name="APPROVED_TAB_TO_SES_VIM_ITEMS" Association="ZP_AISP_SESVIM_HEAD_BNDSampleService.APPROVED_TAB_TO_SES_VIM_ITEMS">
+                <AssociationSet Name="APPROVED_TAB_TO_SES_VIM_ITEMS" Association="SESVIM_CUSTOMER_SIDE.APPROVED_TAB_TO_SES_VIM_ITEMS">
                     <End Role="APPROVED_TAB" EntitySet="APPROVED_TAB"/>
                     <End Role="SESVimItem" EntitySet="SESVimItem"/>
                 </AssociationSet>
-                <AssociationSet Name="APPROVED_TAB_TO_SES_VIM_ATTACHMENTS" Association="ZP_AISP_SESVIM_HEAD_BNDSampleService.APPROVED_TAB_TO_SES_VIM_ATTACHMENTS">
+                <AssociationSet Name="APPROVED_TAB_TO_SES_VIM_ATTACHMENTS" Association="SESVIM_CUSTOMER_SIDE.APPROVED_TAB_TO_SES_VIM_ATTACHMENTS">
                     <End Role="APPROVED_TAB" EntitySet="APPROVED_TAB"/>
                     <End Role="SESVimAttachments" EntitySet="SESVimAttachments"/>
                 </AssociationSet>
-                <AssociationSet Name="SESVimHead_TO_SES_VIM_ITEMS" Association="ZP_AISP_SESVIM_HEAD_BNDSampleService.SESVimHead_TO_SES_VIM_ITEMS">
+                <AssociationSet Name="SESVimHead_TO_SES_VIM_ITEMS" Association="SESVIM_CUSTOMER_SIDE.SESVimHead_TO_SES_VIM_ITEMS">
                     <End Role="SESVimHead" EntitySet="SESVimHead"/>
                     <End Role="SESVimItem" EntitySet="SESVimItem"/>
                 </AssociationSet>
-                <AssociationSet Name="SESVimHead_TO_SES_VIM_ATTACHMENTS" Association="ZP_AISP_SESVIM_HEAD_BNDSampleService.SESVimHead_TO_SES_VIM_ATTACHMENTS">
+                <AssociationSet Name="SESVimHead_TO_SES_VIM_ATTACHMENTS" Association="SESVIM_CUSTOMER_SIDE.SESVimHead_TO_SES_VIM_ATTACHMENTS">
                     <End Role="SESVimHead" EntitySet="SESVimHead"/>
                     <End Role="SESVimAttachments" EntitySet="SESVimAttachments"/>
                 </AssociationSet>
             </EntityContainer>
-            <EntityType Name="ZI_AISP_SESVIM_DETAILS" sap:content-version="1" sap:label="For getting SES Details.">
+            <EntityType Name="STATUS_FOR_VIM">
                 <Key>
-                    <PropertyRef Name="Packno"/>
-                    <PropertyRef Name="Introw"/>
-                    <PropertyRef Name="Extrow"/>
+                    <PropertyRef Name="Status"/>
                 </Key>
-                <Property Name="Packno" Type="Edm.String" MaxLength="10" Nullable="false" sap:display-format="NonNegative" sap:label="Package number"/>
-                <Property Name="Introw" Type="Edm.String" MaxLength="10" Nullable="false" sap:display-format="NonNegative" sap:label="Line" sap:quickinfo="Line Number"/>
-                <Property Name="Extrow" Type="Edm.String" MaxLength="10" Nullable="false" sap:display-format="NonNegative" sap:label="Line Number"/>
-                <Property Name="Del" Type="Edm.String" MaxLength="1" sap:display-format="UpperCase" sap:label="Deletion Indicator"/>
-                <Property Name="Srvpos" Type="Edm.String" MaxLength="18" sap:display-format="UpperCase" sap:label="Activity number" sap:quickinfo="Activity Number"/>
-                <Property Name="Rang" Type="Edm.Byte" sap:label="Hierarchy level" sap:quickinfo="Hierarchy level of group"/>
-                <Property Name="Extgroup" Type="Edm.String" MaxLength="8" sap:display-format="UpperCase" sap:label="Outline Level"/>
-                <Property Name="Pckge" Type="Edm.String" MaxLength="1" sap:display-format="UpperCase" sap:label="Service Assignment"/>
-                <Property Name="SubPackno" Type="Edm.String" MaxLength="10" sap:display-format="NonNegative" sap:label="Package" sap:quickinfo="Subpackage number"/>
-                <Property Name="Lbnum" Type="Edm.String" MaxLength="3" sap:display-format="UpperCase" sap:label="Service Type" sap:quickinfo="Short Description of Service Type"/>
-                <Property Name="Ausgb" Type="Edm.String" MaxLength="4" sap:display-format="NonNegative" sap:label="Edition" sap:quickinfo="Edition of Service Type"/>
-                <Property Name="Stlvpos" Type="Edm.String" MaxLength="18" sap:display-format="UpperCase" sap:label="SSC Item" sap:quickinfo="Standard Service Catalog Item"/>
-                <Property Name="Extsrvno" Type="Edm.String" MaxLength="18" sap:display-format="UpperCase" sap:label="External Service No." sap:quickinfo="Supplier's Service Number"/>
-                <Property Name="Menge" Type="Edm.Decimal" Precision="13" Scale="3" sap:unit="Meins" sap:label="Quantity" sap:quickinfo="Quantity with Sign"/>
-                <Property Name="Meins" Type="Edm.String" MaxLength="3" sap:label="Base Unit of Measure" sap:semantics="unit-of-measure"/>
-                <Property Name="Uebto" Type="Edm.Decimal" Precision="3" Scale="1" sap:label="Overfulfillment Tol." sap:quickinfo="Overfulfillment Tolerance"/>
-                <Property Name="Uebtk" Type="Edm.Boolean" sap:display-format="UpperCase" sap:label="Unlimited Overfulf." sap:quickinfo="Unlimited Overfulfillment"/>
-                <Property Name="WithLim" Type="Edm.String" MaxLength="1" sap:display-format="UpperCase" sap:label="Also Unplanned" sap:quickinfo="Also Search in Limits"/>
-                <Property Name="Spinf" Type="Edm.Boolean" sap:display-format="UpperCase" sap:label="Condition Update" sap:quickinfo="Update Conditions"/>
-                <Property Name="Peinh" Type="Edm.Decimal" Precision="5" Scale="0" sap:label="Price unit"/>
-                <Property Name="Unitprice" Type="Edm.Decimal" Precision="11" Scale="3" sap:unit="Waers" sap:variable-scale="true" sap:label="Gross Price"/>
-                <Property Name="Itemtotalprice" Type="Edm.Decimal" Precision="11" Scale="3" sap:unit="Waers" sap:variable-scale="true" sap:label="Net Value" sap:quickinfo="Net Value of Item"/>
-                <Property Name="Frompos" Type="Edm.String" MaxLength="6" sap:display-format="UpperCase" sap:label="Lower Limit"/>
-                <Property Name="Waers" Type="Edm.String" MaxLength="5" sap:label="Currency" sap:quickinfo="Currency Key" sap:semantics="currency-code"/>
-                <Property Name="Topos" Type="Edm.String" MaxLength="6" sap:display-format="UpperCase" sap:label="Upper Limit"/>
-                <Property Name="Ktext1" Type="Edm.String" MaxLength="40" sap:label="Short Text"/>
-                <Property Name="Vrtkz" Type="Edm.String" MaxLength="1" sap:display-format="UpperCase" sap:label="Distrib. Indicator" sap:quickinfo="Distribution Indicator for Multiple Account Assignment"/>
-                <Property Name="Twrkz" Type="Edm.String" MaxLength="1" sap:display-format="UpperCase" sap:label="Partial invoice" sap:quickinfo="Partial invoice indicator"/>
-                <Property Name="Pernr" Type="Edm.String" MaxLength="8" sap:display-format="NonNegative" sap:label="Personnel Number"/>
-                <Property Name="Molga" Type="Edm.String" MaxLength="2" sap:display-format="UpperCase" sap:label="HCM Localization"/>
-                <Property Name="Lgart" Type="Edm.String" MaxLength="4" sap:display-format="UpperCase" sap:label="Wage Type"/>
-                <Property Name="Lgtxt" Type="Edm.String" MaxLength="25" sap:label="Wage Type Long Text"/>
-                <Property Name="Stell" Type="Edm.String" MaxLength="8" sap:display-format="NonNegative" sap:label="Job key" sap:quickinfo="Job"/>
-                <Property Name="Iftnr" Type="Edm.String" MaxLength="10" sap:display-format="NonNegative" sap:label="Number" sap:quickinfo="Sequence Number for CO/MM-SRV Interface Tables"/>
-                <Property Name="Budat" Type="Edm.DateTime" sap:display-format="Date" sap:label="Posting Date" sap:quickinfo="Posting Date in the Document"/>
-                <Property Name="Insdt" Type="Edm.DateTime" sap:display-format="Date" sap:label="Insert date" sap:quickinfo="Date on Which This Record was Stored in the Table"/>
-                <Property Name="PlnPackno" Type="Edm.String" MaxLength="10" sap:display-format="NonNegative" sap:label="P" sap:quickinfo="Source package number"/>
-                <Property Name="PlnIntrow" Type="Edm.String" MaxLength="10" sap:display-format="NonNegative" sap:label="I" sap:quickinfo="Entry: Planned package line"/>
-                <Property Name="KntPackno" Type="Edm.String" MaxLength="10" sap:display-format="NonNegative" sap:label="Pkg. no." sap:quickinfo="Entry: Unplanned from contract"/>
-                <Property Name="KntIntrow" Type="Edm.String" MaxLength="10" sap:display-format="NonNegative" sap:label="Line" sap:quickinfo="Entry: Unplanned from contract"/>
-                <Property Name="TmpPackno" Type="Edm.String" MaxLength="10" sap:display-format="NonNegative" sap:label="Entry: Unplanned service from model specifications" sap:heading=""/>
-                <Property Name="TmpIntrow" Type="Edm.String" MaxLength="10" sap:display-format="NonNegative" sap:label="Entry: Unplanned service from model specifications" sap:heading=""/>
-                <Property Name="StlvLim" Type="Edm.Boolean" sap:display-format="UpperCase" sap:label="SSC limits" sap:quickinfo="Service line refers to standard service catalog limits"/>
-                <Property Name="LimitRow" Type="Edm.String" MaxLength="10" sap:display-format="NonNegative" sap:label="Line" sap:quickinfo="Entry: Unplanned, limit line"/>
-                <Property Name="ActMenge" Type="Edm.Decimal" Precision="13" Scale="3" sap:unit="Meins" sap:label="Entered Quantity" sap:quickinfo="Purchase Order: Entered Quantity"/>
-                <Property Name="ActWert" Type="Edm.Decimal" Precision="11" Scale="3" sap:unit="Waers" sap:variable-scale="true" sap:label="Entered Value"/>
-                <Property Name="KntWert" Type="Edm.Decimal" Precision="11" Scale="3" sap:unit="Waers" sap:variable-scale="true" sap:label="Value Released" sap:quickinfo="Contract: Value Released (via Release Orders)"/>
-                <Property Name="KntMenge" Type="Edm.Decimal" Precision="13" Scale="3" sap:unit="Meins" sap:label="Qty Released" sap:quickinfo="Contract: Quantity Released (by Issue of Release Orders)"/>
-                <Property Name="Zielwert" Type="Edm.Decimal" Precision="11" Scale="3" sap:unit="Waers" sap:variable-scale="true" sap:label="Tgt Val." sap:quickinfo="Target Value"/>
-                <Property Name="UngWert" Type="Edm.Decimal" Precision="11" Scale="3" sap:unit="Waers" sap:variable-scale="true" sap:label="Unpl. Released Val." sap:quickinfo="Contract: Unplanned Released Value"/>
-                <Property Name="UngMenge" Type="Edm.Decimal" Precision="13" Scale="3" sap:unit="Meins" sap:label="Unpl. Released Qty" sap:quickinfo="Contract: Unplanned Released Quantity"/>
-                <Property Name="AltIntrow" Type="Edm.String" MaxLength="10" sap:display-format="NonNegative" sap:label="Alternative" sap:quickinfo="Alternatives: Reference to basic item"/>
-                <Property Name="Basic" Type="Edm.String" MaxLength="1" sap:display-format="UpperCase" sap:label="Basic Line"/>
-                <Property Name="Alternat" Type="Edm.String" MaxLength="1" sap:display-format="UpperCase" sap:label="Alternative Line"/>
-                <Property Name="Bidder" Type="Edm.String" MaxLength="1" sap:display-format="UpperCase" sap:label="Bidder's Line"/>
-                <Property Name="Supple" Type="Edm.String" MaxLength="1" sap:display-format="UpperCase" sap:label="Supplementary Line"/>
-                <Property Name="Freeqty" Type="Edm.String" MaxLength="1" sap:display-format="UpperCase" sap:label="Line with Open Qty" sap:quickinfo="Line with Open Quantity"/>
-                <Property Name="Inform" Type="Edm.String" MaxLength="1" sap:display-format="UpperCase" sap:label="Informatory Line"/>
-                <Property Name="Pausch" Type="Edm.String" MaxLength="1" sap:display-format="UpperCase" sap:label="Blanket Line"/>
-                <Property Name="Eventual" Type="Edm.String" MaxLength="1" sap:display-format="UpperCase" sap:label="Contingency Line"/>
-                <Property Name="Mwskz" Type="Edm.String" MaxLength="2" sap:display-format="UpperCase" sap:label="Tax Code" sap:quickinfo="Tax on sales/purchases code"/>
-                <Property Name="Txjcd" Type="Edm.String" MaxLength="15" sap:display-format="UpperCase" sap:label="Tax Jurisdiction"/>
-                <Property Name="Txdat" Type="Edm.DateTime" sap:display-format="Date" sap:label="Tax Date" sap:quickinfo="Date for Determining Tax Rates"/>
-                <Property Name="PrsChg" Type="Edm.Boolean" sap:display-format="UpperCase" sap:label="Price Change" sap:quickinfo="Price Change in Entry Sheet"/>
-                <Property Name="Matkl" Type="Edm.String" MaxLength="9" sap:display-format="UpperCase" sap:label="Material Group"/>
-                <Property Name="Tbtwr" Type="Edm.Decimal" Precision="11" Scale="3" sap:unit="Waers" sap:variable-scale="true" sap:label="Gross Price"/>
-                <Property Name="Navnw" Type="Edm.Decimal" Precision="11" Scale="3" sap:unit="Waers" sap:variable-scale="true" sap:label="Non-ded. input tax" sap:quickinfo="Non-deductible input tax"/>
-                <Property Name="Baswr" Type="Edm.Decimal" Precision="11" Scale="3" sap:unit="Waers" sap:variable-scale="true" sap:label="Tax base amount"/>
-                <Property Name="Kknumv" Type="Edm.String" MaxLength="10" sap:display-format="UpperCase" sap:label="Doc. Condition No." sap:quickinfo="Number of the Document Condition"/>
-                <Property Name="Iwein" Type="Edm.String" MaxLength="3" sap:label="Unit for Work" sap:semantics="unit-of-measure"/>
-                <Property Name="IntWork" Type="Edm.Decimal" Precision="8" Scale="2" sap:unit="Iwein" sap:label="Work" sap:quickinfo="Internal Work"/>
-                <Property Name="Externalid" Type="Edm.String" MaxLength="40" sap:label="SRM Reference" sap:quickinfo="SRM Reference Key"/>
-                <Property Name="Kstar" Type="Edm.String" MaxLength="10" sap:display-format="UpperCase" sap:label="Cost Element"/>
-                <Property Name="ActWork" Type="Edm.Decimal" Precision="8" Scale="2" sap:unit="Iwein" sap:label="Work" sap:quickinfo="Internal Work"/>
-                <Property Name="Mapno" Type="Edm.String" MaxLength="4" sap:display-format="NonNegative" sap:label="Mapping Commitment" sap:quickinfo="Mapping Field f. PACKNO, INTROW at Item Level for Commitment"/>
-                <Property Name="Srvmapkey" Type="Edm.String" MaxLength="10" sap:display-format="NonNegative" sap:label="Item ID" sap:quickinfo="Item Key for eSOA Messages"/>
-                <Property Name="Taxtariffcode" Type="Edm.String" MaxLength="16" sap:display-format="UpperCase" sap:label="Tax Tariff Code"/>
-                <Property Name="Sdate" Type="Edm.DateTime" sap:display-format="Date" sap:label="Date"/>
-                <Property Name="Begtime" Type="Edm.Time" sap:label="Start Time"/>
-                <Property Name="Endtime" Type="Edm.Time" sap:label="End Time"/>
-                <Property Name="Persext" Type="Edm.String" MaxLength="40" sap:label="Personnel Number" sap:quickinfo="External Personnel Number"/>
-                <Property Name="Catscounte" Type="Edm.String" MaxLength="12" sap:display-format="UpperCase" sap:label="Counter" sap:quickinfo="Counter for Records in Time Recording"/>
-                <Property Name="Stokz" Type="Edm.Boolean" sap:display-format="UpperCase" sap:label="Reversed" sap:quickinfo="Indicator: Document was reversed"/>
-                <Property Name="Belnr" Type="Edm.String" MaxLength="10" sap:display-format="UpperCase" sap:label="Document no."/>
+                <Property Name="Status" Type="Edm.String" Nullable="false"/>
             </EntityType>
-            <EntityType Name="ZP_AISP_SESVIM_HEAD" sap:content-version="1" sap:label="Projection view for Service Entry Sheet based Invoice Head">
+            <EntityType Name="VENDOE_CODE">
                 <Key>
-                    <PropertyRef Name="Ebeln"/>
+                    <PropertyRef Name="Lifnr"/>
                 </Key>
-                <Property Name="Delete_mc" Type="Edm.Boolean" sap:label="Dyn. Method Control" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
-                <Property Name="Update_mc" Type="Edm.Boolean" sap:label="Dyn. Method Control" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
-                <Property Name="to_sesvimitm_oc" Type="Edm.Boolean" sap:label="Dynamic CbA-Control" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
-                <Property Name="Ebeln" Type="Edm.String" MaxLength="10" Nullable="false" sap:display-format="UpperCase" sap:label="Purchasing Document" sap:quickinfo="Purchasing Document Number"/>
-                <Property Name="Bukrs" Type="Edm.String" MaxLength="4" sap:display-format="UpperCase" sap:label="Company Code"/>
-                <Property Name="Ernam" Type="Edm.String" MaxLength="12" sap:display-format="UpperCase" sap:label="Created By" sap:quickinfo="User of person who created a purchasing document"/>
-                <Property Name="Lastchangedatetime" Type="Edm.DateTimeOffset" Precision="7" sap:label="Last Changed" sap:quickinfo="Change Time Stamp"/>
-                <Property Name="Pincr" Type="Edm.String" MaxLength="5" sap:display-format="NonNegative" sap:label="Item Number Interval"/>
-                <Property Name="Lponr" Type="Edm.String" MaxLength="5" sap:display-format="NonNegative" sap:label="Last Item" sap:quickinfo="Last Item Number"/>
-                <Property Name="Lifnr" Type="Edm.String" MaxLength="10" sap:display-format="UpperCase" sap:label="Supplier" sap:quickinfo="Vendor's account number"/>
-                <Property Name="Status" Type="Edm.String" MaxLength="25"/>
-                <Property Name="Amount" Type="Edm.Decimal" Precision="13" Scale="3" sap:unit="Waers" sap:variable-scale="true"/>
-                <Property Name="name1" Type="Edm.String" MaxLength="35" sap:label="Name" sap:quickinfo="Name 1"/>
-                <Property Name="Ship1" Type="Edm.String" MaxLength="72"/>
-                <Property Name="Ship2" Type="Edm.String" MaxLength="75"/>
-                <Property Name="Zterm" Type="Edm.String" MaxLength="4" sap:display-format="UpperCase" sap:label="Payment terms" sap:quickinfo="Terms of payment key"/>
-                <Property Name="Vendoraddress" Type="Edm.String" MaxLength="86"/>
-                <Property Name="Bankacc" Type="Edm.String" MaxLength="18" sap:display-format="UpperCase" sap:label="Bank Account" sap:quickinfo="Bank account number"/>
-                <Property Name="Bankname" Type="Edm.String" MaxLength="60" sap:label="Bank Name" sap:quickinfo="Name of Financial Institution"/>
-                <Property Name="Spras" Type="Edm.String" MaxLength="2" sap:label="Language Key"/>
-                <Property Name="Ekorg" Type="Edm.String" MaxLength="4" sap:display-format="UpperCase" sap:label="Purch. organization" sap:quickinfo="Purchasing organization"/>
-                <Property Name="Ekgrp" Type="Edm.String" MaxLength="3" sap:display-format="UpperCase" sap:label="Purchasing Group"/>
-                <Property Name="Waers" Type="Edm.String" MaxLength="5" sap:label="Currency" sap:quickinfo="Currency Key" sap:semantics="currency-code"/>
-                <Property Name="Kufix" Type="Edm.Boolean" sap:display-format="UpperCase" sap:label="Fixed Exchange Rate" sap:quickinfo="Indicator for Fixed Exchange Rate"/>
-                <Property Name="Bedat" Type="Edm.DateTime" sap:display-format="Date" sap:label="Document Date" sap:quickinfo="Purchasing Document Date"/>
-                <Property Name="Dptyp" Type="Edm.String" MaxLength="4" sap:display-format="UpperCase" sap:label="Down Payment" sap:quickinfo="Down Payment Indicator"/>
-                <Property Name="Dppct" Type="Edm.Decimal" Precision="5" Scale="2" sap:label="Down Payment %" sap:quickinfo="Down Payment Percentage"/>
-                <Property Name="Dpamt" Type="Edm.Decimal" Precision="11" Scale="3" sap:unit="Waers" sap:variable-scale="true" sap:label="Down Payment Amount" sap:quickinfo="Down Payment Amount in Document Currency"/>
-                <Property Name="Dpdat" Type="Edm.DateTime" sap:display-format="Date" sap:label="Due Date for DP" sap:quickinfo="Due Date for Down Payment"/>
+                <Property Name="Lifnr" Type="Edm.String" Nullable="false"/>
             </EntityType>
-            <EntityType Name="ZP_AISP_SESVIM_ITEM" sap:content-version="1" sap:label="Projection view for Service Entry Sheet based Invoice Item">
+            <EntityType Name="COMPANY_CODE">
                 <Key>
-                    <PropertyRef Name="Lblni"/>
-                    <PropertyRef Name="Ebeln"/>
+                    <PropertyRef Name="Bukrs"/>
                 </Key>
-                <Property Name="Delete_mc" Type="Edm.Boolean" sap:label="Dyn. Method Control" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
-                <Property Name="Update_mc" Type="Edm.Boolean" sap:label="Dyn. Method Control" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
-                <Property Name="Lblni" Type="Edm.String" MaxLength="10" Nullable="false" sap:display-format="UpperCase" sap:label="Entry Sheet" sap:quickinfo="Entry Sheet Number"/>
-                <Property Name="Ebeln" Type="Edm.String" MaxLength="10" Nullable="false" sap:display-format="UpperCase" sap:label="Purchasing Document" sap:quickinfo="Purchasing Document Number" sap:creatable="false" sap:updatable="false"/>
-                <Property Name="Ebelp" Type="Edm.String" MaxLength="5" sap:display-format="NonNegative" sap:label="Item" sap:quickinfo="Item Number of Purchasing Document"/>
-                <Property Name="Lblne" Type="Edm.String" MaxLength="16" sap:display-format="UpperCase" sap:label="External Number" sap:quickinfo="External Entry Sheet Number"/>
-                <Property Name="Ernam" Type="Edm.String" MaxLength="12" sap:display-format="UpperCase" sap:label="Created By" sap:quickinfo="Name of Person Responsible for Creating the Object"/>
-                <Property Name="Erdat" Type="Edm.DateTime" sap:display-format="Date" sap:label="Created on" sap:quickinfo="Date on which the record was created"/>
-                <Property Name="Aedat" Type="Edm.DateTime" sap:display-format="Date" sap:label="Changed On" sap:quickinfo="Last Changed On"/>
-                <Property Name="Aenam" Type="Edm.String" MaxLength="12" sap:display-format="UpperCase" sap:label="Changed By" sap:quickinfo="Name of Person Who Changed Object"/>
-                <Property Name="Sbnamag" Type="Edm.String" MaxLength="12" sap:label="PersRsp.Int." sap:quickinfo="Person Responsible (Internally)"/>
-                <Property Name="Sbnaman" Type="Edm.String" MaxLength="12" sap:label="PersRsp.Ext." sap:quickinfo="Person Responsible (Externally)"/>
-                <Property Name="SubPackno" Type="Edm.String" MaxLength="10" sap:display-format="NonNegative" sap:label="Package" sap:quickinfo="Subpackage number"/>
-                <Property Name="Status" Type="Edm.String" MaxLength="15"/>
-                <Property Name="Lzvon" Type="Edm.DateTime" sap:display-format="Date" sap:label="Period"/>
-                <Property Name="Lzbis" Type="Edm.DateTime" sap:display-format="Date" sap:label="End" sap:quickinfo="End of period"/>
-                <Property Name="Lwert" Type="Edm.Decimal" Precision="11" Scale="3" sap:unit="Waers" sap:variable-scale="true" sap:label="Gross Value" sap:quickinfo="Value of Services"/>
-                <Property Name="Uwert" Type="Edm.Decimal" Precision="11" Scale="3" sap:unit="Waers" sap:variable-scale="true" sap:label="Unplanned Portion" sap:quickinfo="Portion from Unplanned Services"/>
-                <Property Name="Unplv" Type="Edm.Decimal" Precision="11" Scale="3" sap:unit="Waers" sap:variable-scale="true" sap:label="Unpl. Val. w/o Cntr." sap:quickinfo="Portion Unplanned Value Without Reference to Contract"/>
-                <Property Name="Waers" Type="Edm.String" MaxLength="5" sap:label="Currency" sap:quickinfo="Currency Key" sap:semantics="currency-code"/>
-                <Property Name="Packno" Type="Edm.String" MaxLength="10" sap:display-format="NonNegative" sap:label="Package number"/>
-                <Property Name="Txz01" Type="Edm.String" MaxLength="40" sap:label="Short Text" sap:quickinfo="Short Text of Service Entry Sheet"/>
-                <Property Name="Loekz" Type="Edm.String" MaxLength="1" sap:display-format="UpperCase" sap:label="Deletion indicator" sap:quickinfo="Deletion indicator in entry sheet"/>
-                <Property Name="Kzabn" Type="Edm.String" MaxLength="1" sap:display-format="UpperCase" sap:label="Acceptance" sap:quickinfo="Acceptance indicator"/>
-                <Property Name="Final" Type="Edm.String" MaxLength="1" sap:display-format="UpperCase" sap:label="Final Entry" sap:quickinfo="Indicator: Final Entry Sheet"/>
-                <Property Name="Pwwe" Type="Edm.Decimal" Precision="3" Scale="0" sap:label="Quality" sap:quickinfo="Points score for quality of services"/>
-                <Property Name="Pwfr" Type="Edm.Decimal" Precision="3" Scale="0" sap:label="On-time delivery" sap:quickinfo="Points score for on-time delivery"/>
-                <Property Name="Bldat" Type="Edm.DateTime" sap:display-format="Date" sap:label="Document Date" sap:quickinfo="Document Date in Document"/>
-                <Property Name="Budat" Type="Edm.DateTime" sap:display-format="Date" sap:label="Posting Date" sap:quickinfo="Posting Date in the Document"/>
-                <Property Name="Xblnr" Type="Edm.String" MaxLength="16" sap:display-format="UpperCase" sap:label="Reference" sap:quickinfo="Reference Document Number"/>
-                <Property Name="Bktxt" Type="Edm.String" MaxLength="25" sap:label="Document Header Text"/>
-                <Property Name="Knttp" Type="Edm.String" MaxLength="1" sap:display-format="UpperCase" sap:label="Acct Assignment Cat." sap:quickinfo="Account Assignment Category"/>
-                <Property Name="Kzvbr" Type="Edm.String" MaxLength="1" sap:display-format="UpperCase" sap:label="Consumption" sap:quickinfo="Consumption posting"/>
-                <Property Name="Netwr" Type="Edm.Decimal" Precision="11" Scale="3" sap:unit="Waers" sap:variable-scale="true" sap:label="Net Value" sap:quickinfo="Net Value of Entry Sheet"/>
-            </EntityType>
-            <EntityType Name="SES_VIM_HEAD_API">
-                <Key>
-                    <PropertyRef Name="Ebeln"/>
-                </Key>
-                <Property Name="Ebeln" Type="Edm.String" MaxLength="10" Nullable="false"/>
-                <Property Name="Bukrs" Type="Edm.String" MaxLength="4"/>
-                <Property Name="Ernam" Type="Edm.String" MaxLength="12"/>
-                <Property Name="Lastchangedatetime" Type="Edm.DateTimeOffset"/>
-                <Property Name="Pincr" Type="Edm.String" MaxLength="10"/>
-                <Property Name="Lponr" Type="Edm.String" MaxLength="5"/>
-                <Property Name="Lifnr" Type="Edm.String" MaxLength="10"/>
-                <Property Name="Status" Type="Edm.String" MaxLength="3"/>
-                <Property Name="Amount" Type="Edm.Decimal" Precision="15" Scale="2"/>
-                <Property Name="name1" Type="Edm.String" MaxLength="100"/>
-                <Property Name="Ship1" Type="Edm.String" MaxLength="100"/>
-                <Property Name="Ship2" Type="Edm.String" MaxLength="100"/>
-                <Property Name="Zterm" Type="Edm.String" MaxLength="4"/>
-                <Property Name="Vendoraddress" Type="Edm.String" MaxLength="200"/>
-                <Property Name="Bankacc" Type="Edm.String" MaxLength="20"/>
-                <Property Name="Bankname" Type="Edm.String" MaxLength="100"/>
-                <Property Name="Spras" Type="Edm.String" MaxLength="2"/>
-                <Property Name="Ekorg" Type="Edm.String" MaxLength="4"/>
-                <Property Name="Ekgrp" Type="Edm.String" MaxLength="3"/>
-                <Property Name="Waers" Type="Edm.String" MaxLength="5"/>
-                <Property Name="Kufix" Type="Edm.String" MaxLength="1"/>
-                <Property Name="Bedat" Type="Edm.DateTime" sap:display-format="Date"/>
-                <Property Name="Dptyp" Type="Edm.String" MaxLength="2"/>
-                <Property Name="Dppct" Type="Edm.Decimal" Precision="5" Scale="2"/>
-                <Property Name="Dpamt" Type="Edm.Decimal" Precision="15" Scale="2"/>
-                <Property Name="Dpdat" Type="Edm.DateTime" sap:display-format="Date"/>
-            </EntityType>
-            <EntityType Name="SES_VIM_ITEM_API">
-                <Key>
-                    <PropertyRef Name="Lblni"/>
-                    <PropertyRef Name="Ebeln"/>
-                </Key>
-                <Property Name="Lblni" Type="Edm.String" MaxLength="10" Nullable="false"/>
-                <Property Name="Ebeln" Type="Edm.String" MaxLength="10" Nullable="false"/>
-                <Property Name="Ebelp" Type="Edm.String" MaxLength="5"/>
-                <Property Name="Lblne" Type="Edm.String" MaxLength="10"/>
-                <Property Name="Ernam" Type="Edm.String" MaxLength="12"/>
-                <Property Name="Erdat" Type="Edm.DateTime" sap:display-format="Date"/>
-                <Property Name="Aedat" Type="Edm.DateTime" sap:display-format="Date"/>
-                <Property Name="Aenam" Type="Edm.String" MaxLength="12"/>
-                <Property Name="Sbnamag" Type="Edm.String" MaxLength="50"/>
-                <Property Name="Sbnaman" Type="Edm.String" MaxLength="100"/>
-                <Property Name="SubPackno" Type="Edm.String" MaxLength="20"/>
-                <Property Name="Status" Type="Edm.String" MaxLength="3"/>
-                <Property Name="Lzvon" Type="Edm.DateTime" sap:display-format="Date"/>
-                <Property Name="Lzbis" Type="Edm.DateTime" sap:display-format="Date"/>
-                <Property Name="Lwert" Type="Edm.Decimal" Precision="15" Scale="2"/>
-                <Property Name="Uwert" Type="Edm.Decimal" Precision="15" Scale="2"/>
-                <Property Name="Unplv" Type="Edm.Decimal" Precision="15" Scale="2"/>
-                <Property Name="Waers" Type="Edm.String" MaxLength="5"/>
-                <Property Name="Packno" Type="Edm.String" MaxLength="20"/>
-                <Property Name="Txz01" Type="Edm.String" MaxLength="255"/>
-                <Property Name="Loekz" Type="Edm.String" MaxLength="1"/>
-                <Property Name="Kzabn" Type="Edm.String" MaxLength="1"/>
-                <Property Name="Final" Type="Edm.String" MaxLength="1"/>
-                <Property Name="Pwwe" Type="Edm.DateTime" sap:display-format="Date"/>
-                <Property Name="Pwfr" Type="Edm.DateTime" sap:display-format="Date"/>
-                <Property Name="Bldat" Type="Edm.DateTime" sap:display-format="Date"/>
-                <Property Name="Budat" Type="Edm.DateTime" sap:display-format="Date"/>
-                <Property Name="Xblnr" Type="Edm.String" MaxLength="20"/>
-                <Property Name="Bktxt" Type="Edm.String" MaxLength="255"/>
-                <Property Name="Knttp" Type="Edm.String" MaxLength="2"/>
-                <Property Name="Kzvbr" Type="Edm.String" MaxLength="1"/>
-                <Property Name="Netwr" Type="Edm.Decimal" Precision="15" Scale="2"/>
-            </EntityType>
-            <EntityType Name="SES_VIM_DETAILS_API">
-                <Key>
-                    <PropertyRef Name="Packno"/>
-                    <PropertyRef Name="Introw"/>
-                    <PropertyRef Name="Extrow"/>
-                </Key>
-                <Property Name="Packno" Type="Edm.String" MaxLength="20" Nullable="false"/>
-                <Property Name="Introw" Type="Edm.String" MaxLength="10" Nullable="false"/>
-                <Property Name="Extrow" Type="Edm.String" MaxLength="10" Nullable="false"/>
-                <Property Name="Del" Type="Edm.String" MaxLength="1"/>
-                <Property Name="Srvpos" Type="Edm.String" MaxLength="10"/>
-                <Property Name="Rang" Type="Edm.String" MaxLength="10"/>
-                <Property Name="Extgroup" Type="Edm.String" MaxLength="10"/>
-                <Property Name="Pckge" Type="Edm.String" MaxLength="20"/>
-                <Property Name="SubPackno" Type="Edm.String" MaxLength="20"/>
-                <Property Name="Lbnum" Type="Edm.String" MaxLength="20"/>
-                <Property Name="Ausgb" Type="Edm.String" MaxLength="5"/>
-                <Property Name="Stlvpos" Type="Edm.String" MaxLength="10"/>
-                <Property Name="Extsrvno" Type="Edm.String" MaxLength="20"/>
-                <Property Name="Menge" Type="Edm.Decimal" Precision="15" Scale="3"/>
-                <Property Name="Meins" Type="Edm.String" MaxLength="3"/>
-                <Property Name="Uebto" Type="Edm.Decimal" Precision="5" Scale="2"/>
-                <Property Name="Uebtk" Type="Edm.String" MaxLength="1"/>
-                <Property Name="WithLim" Type="Edm.String" MaxLength="1"/>
-                <Property Name="Spinf" Type="Edm.String" MaxLength="1"/>
-                <Property Name="Peinh" Type="Edm.Decimal" Precision="10" Scale="2"/>
-                <Property Name="Unitprice" Type="Edm.Decimal" Precision="15" Scale="2"/>
-                <Property Name="Itemtotalprice" Type="Edm.Decimal" Precision="15" Scale="2"/>
-                <Property Name="Frompos" Type="Edm.String" MaxLength="10"/>
-                <Property Name="Waers" Type="Edm.String" MaxLength="5"/>
-                <Property Name="Topos" Type="Edm.String" MaxLength="10"/>
-                <Property Name="Ktext1" Type="Edm.String" MaxLength="255"/>
-                <Property Name="Vrtkz" Type="Edm.String" MaxLength="5"/>
-                <Property Name="Twrkz" Type="Edm.String" MaxLength="5"/>
-                <Property Name="Pernr" Type="Edm.String" MaxLength="10"/>
-                <Property Name="Molga" Type="Edm.String" MaxLength="2"/>
-                <Property Name="Lgart" Type="Edm.String" MaxLength="4"/>
-                <Property Name="Lgtxt" Type="Edm.String" MaxLength="255"/>
-                <Property Name="Stell" Type="Edm.String" MaxLength="10"/>
-                <Property Name="Iftnr" Type="Edm.String" MaxLength="20"/>
-                <Property Name="Budat" Type="Edm.DateTime" sap:display-format="Date"/>
-                <Property Name="Insdt" Type="Edm.DateTime" sap:display-format="Date"/>
-                <Property Name="PlnPackno" Type="Edm.String" MaxLength="20"/>
-                <Property Name="PlnIntrow" Type="Edm.String" MaxLength="10"/>
-                <Property Name="KntPackno" Type="Edm.String" MaxLength="20"/>
-                <Property Name="KntIntrow" Type="Edm.String" MaxLength="10"/>
-                <Property Name="TmpPackno" Type="Edm.String" MaxLength="20"/>
-                <Property Name="TmpIntrow" Type="Edm.String" MaxLength="10"/>
-                <Property Name="StlvLim" Type="Edm.Decimal" Precision="15" Scale="2"/>
-                <Property Name="LimitRow" Type="Edm.String" MaxLength="10"/>
-                <Property Name="ActMenge" Type="Edm.Decimal" Precision="15" Scale="3"/>
-                <Property Name="ActWert" Type="Edm.Decimal" Precision="15" Scale="2"/>
-                <Property Name="KntWert" Type="Edm.Decimal" Precision="15" Scale="2"/>
-                <Property Name="KntMenge" Type="Edm.Decimal" Precision="15" Scale="3"/>
-                <Property Name="Zielwert" Type="Edm.Decimal" Precision="15" Scale="2"/>
-                <Property Name="UngWert" Type="Edm.Decimal" Precision="15" Scale="2"/>
-                <Property Name="UngMenge" Type="Edm.Decimal" Precision="15" Scale="3"/>
-                <Property Name="AltIntrow" Type="Edm.String" MaxLength="10"/>
-                <Property Name="Basic" Type="Edm.String" MaxLength="1"/>
-                <Property Name="Alternat" Type="Edm.String" MaxLength="1"/>
-                <Property Name="Bidder" Type="Edm.String" MaxLength="1"/>
-                <Property Name="Supple" Type="Edm.String" MaxLength="1"/>
-                <Property Name="Freeqty" Type="Edm.String" MaxLength="1"/>
-                <Property Name="Inform" Type="Edm.String" MaxLength="1"/>
-                <Property Name="Pausch" Type="Edm.String" MaxLength="1"/>
-                <Property Name="Eventual" Type="Edm.String" MaxLength="1"/>
-                <Property Name="Mwskz" Type="Edm.String" MaxLength="4"/>
-                <Property Name="Txjcd" Type="Edm.String" MaxLength="15"/>
-                <Property Name="Txdat" Type="Edm.DateTime" sap:display-format="Date"/>
-                <Property Name="PrsChg" Type="Edm.String" MaxLength="1"/>
-                <Property Name="Matkl" Type="Edm.String" MaxLength="18"/>
-                <Property Name="Tbtwr" Type="Edm.Decimal" Precision="15" Scale="2"/>
-                <Property Name="Navnw" Type="Edm.Decimal" Precision="15" Scale="2"/>
-                <Property Name="Baswr" Type="Edm.Decimal" Precision="15" Scale="2"/>
-                <Property Name="Kknumv" Type="Edm.String" MaxLength="10"/>
-                <Property Name="Iwein" Type="Edm.String" MaxLength="3"/>
-                <Property Name="IntWork" Type="Edm.Decimal" Precision="15" Scale="3"/>
-                <Property Name="Externalid" Type="Edm.String" MaxLength="50"/>
-                <Property Name="Kstar" Type="Edm.String" MaxLength="10"/>
-                <Property Name="ActWork" Type="Edm.Decimal" Precision="15" Scale="3"/>
-                <Property Name="Mapno" Type="Edm.String" MaxLength="20"/>
-                <Property Name="Srvmapkey" Type="Edm.String" MaxLength="20"/>
-                <Property Name="Taxtariffcode" Type="Edm.String" MaxLength="10"/>
-                <Property Name="Sdate" Type="Edm.DateTime" sap:display-format="Date"/>
-                <Property Name="Begtime" Type="Edm.Time"/>
-                <Property Name="Endtime" Type="Edm.Time"/>
-                <Property Name="Persext" Type="Edm.String" MaxLength="20"/>
-                <Property Name="Catscounte" Type="Edm.String" MaxLength="10"/>
-                <Property Name="Stokz" Type="Edm.String" MaxLength="1"/>
-                <Property Name="Belnr" Type="Edm.String" MaxLength="10"/>
+                <Property Name="Bukrs" Type="Edm.String" Nullable="false"/>
             </EntityType>
             <EntityType Name="REJECTED_TAB">
                 <Key>
                     <PropertyRef Name="REQUEST_NO"/>
                 </Key>
                 <Property Name="REQUEST_NO" Type="Edm.Int32" Nullable="false"/>
+                <Property Name="SUPPLIER_ORG_NAME" Type="Edm.String"/>
                 <Property Name="COMPANY_CODE" Type="Edm.String"/>
                 <Property Name="CREATED_BY" Type="Edm.String"/>
                 <Property Name="VENDOR_CODE" Type="Edm.String"/>
@@ -420,15 +109,17 @@
                 <Property Name="CURRENT_ASSIGNEE" Type="Edm.String"/>
                 <Property Name="SAP_INVOICE_NUMBER" Type="Edm.String"/>
                 <Property Name="REJECTED_COMMENT" Type="Edm.String"/>
+                <Property Name="value" Type="Edm.String"/>
                 <Property Name="APPROVED_COMMENT" Type="Edm.String"/>
-                <NavigationProperty Name="TO_SES_VIM_ITEMS" Relationship="ZP_AISP_SESVIM_HEAD_BNDSampleService.REJECTED_TAB_TO_SES_VIM_ITEMS" FromRole="REJECTED_TAB" ToRole="SESVimItem"/>
-                <NavigationProperty Name="TO_SES_VIM_ATTACHMENTS" Relationship="ZP_AISP_SESVIM_HEAD_BNDSampleService.REJECTED_TAB_TO_SES_VIM_ATTACHMENTS" FromRole="REJECTED_TAB" ToRole="SESVimAttachments"/>
+                <NavigationProperty Name="TO_SES_VIM_ITEMS" Relationship="SESVIM_CUSTOMER_SIDE.REJECTED_TAB_TO_SES_VIM_ITEMS" FromRole="REJECTED_TAB" ToRole="SESVimItem"/>
+                <NavigationProperty Name="TO_SES_VIM_ATTACHMENTS" Relationship="SESVIM_CUSTOMER_SIDE.REJECTED_TAB_TO_SES_VIM_ATTACHMENTS" FromRole="REJECTED_TAB" ToRole="SESVimAttachments"/>
             </EntityType>
             <EntityType Name="PENDING_TAB">
                 <Key>
                     <PropertyRef Name="REQUEST_NO"/>
                 </Key>
                 <Property Name="REQUEST_NO" Type="Edm.Int32" Nullable="false"/>
+                <Property Name="SUPPLIER_ORG_NAME" Type="Edm.String"/>
                 <Property Name="COMPANY_CODE" Type="Edm.String"/>
                 <Property Name="CREATED_BY" Type="Edm.String"/>
                 <Property Name="VENDOR_CODE" Type="Edm.String"/>
@@ -453,15 +144,17 @@
                 <Property Name="CURRENT_ASSIGNEE" Type="Edm.String"/>
                 <Property Name="SAP_INVOICE_NUMBER" Type="Edm.String"/>
                 <Property Name="REJECTED_COMMENT" Type="Edm.String"/>
+                <Property Name="value" Type="Edm.String"/>
                 <Property Name="APPROVED_COMMENT" Type="Edm.String"/>
-                <NavigationProperty Name="TO_SES_VIM_ITEMS" Relationship="ZP_AISP_SESVIM_HEAD_BNDSampleService.PENDING_TAB_TO_SES_VIM_ITEMS" FromRole="PENDING_TAB" ToRole="SESVimItem"/>
-                <NavigationProperty Name="TO_SES_VIM_ATTACHMENTS" Relationship="ZP_AISP_SESVIM_HEAD_BNDSampleService.PENDING_TAB_TO_SES_VIM_ATTACHMENTS" FromRole="PENDING_TAB" ToRole="SESVimAttachments"/>
+                <NavigationProperty Name="TO_SES_VIM_ITEMS" Relationship="SESVIM_CUSTOMER_SIDE.PENDING_TAB_TO_SES_VIM_ITEMS" FromRole="PENDING_TAB" ToRole="SESVimItem"/>
+                <NavigationProperty Name="TO_SES_VIM_ATTACHMENTS" Relationship="SESVIM_CUSTOMER_SIDE.PENDING_TAB_TO_SES_VIM_ATTACHMENTS" FromRole="PENDING_TAB" ToRole="SESVimAttachments"/>
             </EntityType>
             <EntityType Name="APPROVED_TAB">
                 <Key>
                     <PropertyRef Name="REQUEST_NO"/>
                 </Key>
                 <Property Name="REQUEST_NO" Type="Edm.Int32" Nullable="false"/>
+                <Property Name="SUPPLIER_ORG_NAME" Type="Edm.String"/>
                 <Property Name="COMPANY_CODE" Type="Edm.String"/>
                 <Property Name="CREATED_BY" Type="Edm.String"/>
                 <Property Name="VENDOR_CODE" Type="Edm.String"/>
@@ -486,15 +179,17 @@
                 <Property Name="CURRENT_ASSIGNEE" Type="Edm.String"/>
                 <Property Name="SAP_INVOICE_NUMBER" Type="Edm.String"/>
                 <Property Name="REJECTED_COMMENT" Type="Edm.String"/>
+                <Property Name="value" Type="Edm.String"/>
                 <Property Name="APPROVED_COMMENT" Type="Edm.String"/>
-                <NavigationProperty Name="TO_SES_VIM_ITEMS" Relationship="ZP_AISP_SESVIM_HEAD_BNDSampleService.APPROVED_TAB_TO_SES_VIM_ITEMS" FromRole="APPROVED_TAB" ToRole="SESVimItem"/>
-                <NavigationProperty Name="TO_SES_VIM_ATTACHMENTS" Relationship="ZP_AISP_SESVIM_HEAD_BNDSampleService.APPROVED_TAB_TO_SES_VIM_ATTACHMENTS" FromRole="APPROVED_TAB" ToRole="SESVimAttachments"/>
+                <NavigationProperty Name="TO_SES_VIM_ITEMS" Relationship="SESVIM_CUSTOMER_SIDE.APPROVED_TAB_TO_SES_VIM_ITEMS" FromRole="APPROVED_TAB" ToRole="SESVimItem"/>
+                <NavigationProperty Name="TO_SES_VIM_ATTACHMENTS" Relationship="SESVIM_CUSTOMER_SIDE.APPROVED_TAB_TO_SES_VIM_ATTACHMENTS" FromRole="APPROVED_TAB" ToRole="SESVimAttachments"/>
             </EntityType>
             <EntityType Name="SESVimHead">
                 <Key>
                     <PropertyRef Name="REQUEST_NO"/>
                 </Key>
                 <Property Name="REQUEST_NO" Type="Edm.Int32" Nullable="false"/>
+                <Property Name="SUPPLIER_ORG_NAME" Type="Edm.String"/>
                 <Property Name="COMPANY_CODE" Type="Edm.String"/>
                 <Property Name="CREATED_BY" Type="Edm.String"/>
                 <Property Name="VENDOR_CODE" Type="Edm.String"/>
@@ -519,9 +214,10 @@
                 <Property Name="CURRENT_ASSIGNEE" Type="Edm.String"/>
                 <Property Name="SAP_INVOICE_NUMBER" Type="Edm.String"/>
                 <Property Name="REJECTED_COMMENT" Type="Edm.String"/>
+                <Property Name="value" Type="Edm.String"/>
                 <Property Name="APPROVED_COMMENT" Type="Edm.String"/>
-                <NavigationProperty Name="TO_SES_VIM_ITEMS" Relationship="ZP_AISP_SESVIM_HEAD_BNDSampleService.SESVimHead_TO_SES_VIM_ITEMS" FromRole="SESVimHead" ToRole="SESVimItem"/>
-                <NavigationProperty Name="TO_SES_VIM_ATTACHMENTS" Relationship="ZP_AISP_SESVIM_HEAD_BNDSampleService.SESVimHead_TO_SES_VIM_ATTACHMENTS" FromRole="SESVimHead" ToRole="SESVimAttachments"/>
+                <NavigationProperty Name="TO_SES_VIM_ITEMS" Relationship="SESVIM_CUSTOMER_SIDE.SESVimHead_TO_SES_VIM_ITEMS" FromRole="SESVimHead" ToRole="SESVimItem"/>
+                <NavigationProperty Name="TO_SES_VIM_ATTACHMENTS" Relationship="SESVIM_CUSTOMER_SIDE.SESVimHead_TO_SES_VIM_ATTACHMENTS" FromRole="SESVimHead" ToRole="SESVimAttachments"/>
             </EntityType>
             <EntityType Name="SESVimItem">
                 <Key>
@@ -574,515 +270,53 @@
                 <Property Name="STATUS" Type="Edm.String"/>
                 <Property Name="ATTACHMENT_ID" Type="Edm.String" Nullable="false"/>
             </EntityType>
+            <EntityType Name="SES_VIM_APPROVAL_LOGS">
+                <Key>
+                    <PropertyRef Name="REQUEST_NO"/>
+                </Key>
+                <Property Name="REQUEST_NO" Type="Edm.Int32" Nullable="false"/>
+                <Property Name="APPROVAL_LEVEL" Type="Edm.Int32"/>
+                <Property Name="APPROVER_ID" Type="Edm.String"/>
+                <Property Name="APPROVER_ROLE" Type="Edm.String"/>
+                <Property Name="ACTION" Type="Edm.String"/>
+                <Property Name="COMMENT" Type="Edm.String"/>
+                <Property Name="TIMESTAMP" Type="Edm.DateTimeOffset" Precision="7"/>
+                <Property Name="S4Response" Type="Edm.String"/>
+                <Property Name="S4ErrorMessage" Type="Edm.String"/>
+                <Property Name="UPDATED_ON" Type="Edm.DateTimeOffset" Precision="7"/>
+            </EntityType>
             <Association Name="REJECTED_TAB_TO_SES_VIM_ITEMS">
-                <End Role="REJECTED_TAB" Type="ZP_AISP_SESVIM_HEAD_BNDSampleService.REJECTED_TAB" Multiplicity="*"/>
-                <End Role="SESVimItem" Type="ZP_AISP_SESVIM_HEAD_BNDSampleService.SESVimItem" Multiplicity="*"/>
+                <End Role="REJECTED_TAB" Type="SESVIM_CUSTOMER_SIDE.REJECTED_TAB" Multiplicity="*"/>
+                <End Role="SESVimItem" Type="SESVIM_CUSTOMER_SIDE.SESVimItem" Multiplicity="*"/>
             </Association>
             <Association Name="REJECTED_TAB_TO_SES_VIM_ATTACHMENTS">
-                <End Role="REJECTED_TAB" Type="ZP_AISP_SESVIM_HEAD_BNDSampleService.REJECTED_TAB" Multiplicity="*"/>
-                <End Role="SESVimAttachments" Type="ZP_AISP_SESVIM_HEAD_BNDSampleService.SESVimAttachments" Multiplicity="*"/>
+                <End Role="REJECTED_TAB" Type="SESVIM_CUSTOMER_SIDE.REJECTED_TAB" Multiplicity="*"/>
+                <End Role="SESVimAttachments" Type="SESVIM_CUSTOMER_SIDE.SESVimAttachments" Multiplicity="*"/>
             </Association>
             <Association Name="PENDING_TAB_TO_SES_VIM_ITEMS">
-                <End Role="PENDING_TAB" Type="ZP_AISP_SESVIM_HEAD_BNDSampleService.PENDING_TAB" Multiplicity="*"/>
-                <End Role="SESVimItem" Type="ZP_AISP_SESVIM_HEAD_BNDSampleService.SESVimItem" Multiplicity="*"/>
+                <End Role="PENDING_TAB" Type="SESVIM_CUSTOMER_SIDE.PENDING_TAB" Multiplicity="*"/>
+                <End Role="SESVimItem" Type="SESVIM_CUSTOMER_SIDE.SESVimItem" Multiplicity="*"/>
             </Association>
             <Association Name="PENDING_TAB_TO_SES_VIM_ATTACHMENTS">
-                <End Role="PENDING_TAB" Type="ZP_AISP_SESVIM_HEAD_BNDSampleService.PENDING_TAB" Multiplicity="*"/>
-                <End Role="SESVimAttachments" Type="ZP_AISP_SESVIM_HEAD_BNDSampleService.SESVimAttachments" Multiplicity="*"/>
+                <End Role="PENDING_TAB" Type="SESVIM_CUSTOMER_SIDE.PENDING_TAB" Multiplicity="*"/>
+                <End Role="SESVimAttachments" Type="SESVIM_CUSTOMER_SIDE.SESVimAttachments" Multiplicity="*"/>
             </Association>
             <Association Name="APPROVED_TAB_TO_SES_VIM_ITEMS">
-                <End Role="APPROVED_TAB" Type="ZP_AISP_SESVIM_HEAD_BNDSampleService.APPROVED_TAB" Multiplicity="*"/>
-                <End Role="SESVimItem" Type="ZP_AISP_SESVIM_HEAD_BNDSampleService.SESVimItem" Multiplicity="*"/>
+                <End Role="APPROVED_TAB" Type="SESVIM_CUSTOMER_SIDE.APPROVED_TAB" Multiplicity="*"/>
+                <End Role="SESVimItem" Type="SESVIM_CUSTOMER_SIDE.SESVimItem" Multiplicity="*"/>
             </Association>
             <Association Name="APPROVED_TAB_TO_SES_VIM_ATTACHMENTS">
-                <End Role="APPROVED_TAB" Type="ZP_AISP_SESVIM_HEAD_BNDSampleService.APPROVED_TAB" Multiplicity="*"/>
-                <End Role="SESVimAttachments" Type="ZP_AISP_SESVIM_HEAD_BNDSampleService.SESVimAttachments" Multiplicity="*"/>
+                <End Role="APPROVED_TAB" Type="SESVIM_CUSTOMER_SIDE.APPROVED_TAB" Multiplicity="*"/>
+                <End Role="SESVimAttachments" Type="SESVIM_CUSTOMER_SIDE.SESVimAttachments" Multiplicity="*"/>
             </Association>
             <Association Name="SESVimHead_TO_SES_VIM_ITEMS">
-                <End Role="SESVimHead" Type="ZP_AISP_SESVIM_HEAD_BNDSampleService.SESVimHead" Multiplicity="*"/>
-                <End Role="SESVimItem" Type="ZP_AISP_SESVIM_HEAD_BNDSampleService.SESVimItem" Multiplicity="*"/>
+                <End Role="SESVimHead" Type="SESVIM_CUSTOMER_SIDE.SESVimHead" Multiplicity="*"/>
+                <End Role="SESVimItem" Type="SESVIM_CUSTOMER_SIDE.SESVimItem" Multiplicity="*"/>
             </Association>
             <Association Name="SESVimHead_TO_SES_VIM_ATTACHMENTS">
-                <End Role="SESVimHead" Type="ZP_AISP_SESVIM_HEAD_BNDSampleService.SESVimHead" Multiplicity="*"/>
-                <End Role="SESVimAttachments" Type="ZP_AISP_SESVIM_HEAD_BNDSampleService.SESVimAttachments" Multiplicity="*"/>
+                <End Role="SESVimHead" Type="SESVIM_CUSTOMER_SIDE.SESVimHead" Multiplicity="*"/>
+                <End Role="SESVimAttachments" Type="SESVIM_CUSTOMER_SIDE.SESVimAttachments" Multiplicity="*"/>
             </Association>
-            <Annotations Target="ZP_AISP_SESVIM_HEAD_BNDSampleService.EntityContainer/ZI_AISP_SESVIM_DETAILS" xmlns="http://docs.oasis-open.org/odata/ns/edm">
-                <Annotation Term="Capabilities.DeleteRestrictions">
-                    <Record Type="Capabilities.DeleteRestrictionsType">
-                        <PropertyValue Property="Deletable" Bool="false"/>
-                    </Record>
-                </Annotation>
-                <Annotation Term="Capabilities.InsertRestrictions">
-                    <Record Type="Capabilities.InsertRestrictionsType">
-                        <PropertyValue Property="Insertable" Bool="false"/>
-                    </Record>
-                </Annotation>
-                <Annotation Term="Capabilities.UpdateRestrictions">
-                    <Record Type="Capabilities.UpdateRestrictionsType">
-                        <PropertyValue Property="Updatable" Bool="false"/>
-                    </Record>
-                </Annotation>
-            </Annotations>
-            <Annotations Target="ZP_AISP_SESVIM_HEAD_BNDSampleService.EntityContainer/ZP_AISP_SESVIM_HEAD" xmlns="http://docs.oasis-open.org/odata/ns/edm">
-                <Annotation Term="Capabilities.DeleteRestrictions">
-                    <Record Type="Capabilities.DeleteRestrictionsType">
-                        <PropertyValue Property="Deletable" Bool="false"/>
-                    </Record>
-                </Annotation>
-                <Annotation Term="Capabilities.InsertRestrictions">
-                    <Record Type="Capabilities.InsertRestrictionsType">
-                        <PropertyValue Property="Insertable" Bool="false"/>
-                    </Record>
-                </Annotation>
-                <Annotation Term="Capabilities.UpdateRestrictions">
-                    <Record Type="Capabilities.UpdateRestrictionsType">
-                        <PropertyValue Property="Updatable" Bool="false"/>
-                    </Record>
-                </Annotation>
-            </Annotations>
-            <Annotations Target="ZP_AISP_SESVIM_HEAD_BNDSampleService.EntityContainer/ZP_AISP_SESVIM_ITEM" xmlns="http://docs.oasis-open.org/odata/ns/edm">
-                <Annotation Term="Capabilities.DeleteRestrictions">
-                    <Record Type="Capabilities.DeleteRestrictionsType">
-                        <PropertyValue Property="Deletable" Bool="false"/>
-                    </Record>
-                </Annotation>
-                <Annotation Term="Capabilities.InsertRestrictions">
-                    <Record Type="Capabilities.InsertRestrictionsType">
-                        <PropertyValue Property="Insertable" Bool="false"/>
-                    </Record>
-                </Annotation>
-                <Annotation Term="Capabilities.UpdateRestrictions">
-                    <Record Type="Capabilities.UpdateRestrictionsType">
-                        <PropertyValue Property="Updatable" Bool="false"/>
-                    </Record>
-                </Annotation>
-            </Annotations>
-            <Annotations Target="ZP_AISP_SESVIM_HEAD_BNDSampleService.SES_VIM_HEAD_API/Ebeln" xmlns="http://docs.oasis-open.org/odata/ns/edm">
-                <Annotation Term="Common.Label" String="PO Number"/>
-            </Annotations>
-            <Annotations Target="ZP_AISP_SESVIM_HEAD_BNDSampleService.SES_VIM_HEAD_API/Bukrs" xmlns="http://docs.oasis-open.org/odata/ns/edm">
-                <Annotation Term="Common.Label" String="Company Code"/>
-            </Annotations>
-            <Annotations Target="ZP_AISP_SESVIM_HEAD_BNDSampleService.SES_VIM_HEAD_API/Ernam" xmlns="http://docs.oasis-open.org/odata/ns/edm">
-                <Annotation Term="Common.Label" String="Created By"/>
-            </Annotations>
-            <Annotations Target="ZP_AISP_SESVIM_HEAD_BNDSampleService.SES_VIM_HEAD_API/Lastchangedatetime" xmlns="http://docs.oasis-open.org/odata/ns/edm">
-                <Annotation Term="Common.Label" String="Last Changed On"/>
-            </Annotations>
-            <Annotations Target="ZP_AISP_SESVIM_HEAD_BNDSampleService.SES_VIM_HEAD_API/Pincr" xmlns="http://docs.oasis-open.org/odata/ns/edm">
-                <Annotation Term="Common.Label" String="Increment"/>
-            </Annotations>
-            <Annotations Target="ZP_AISP_SESVIM_HEAD_BNDSampleService.SES_VIM_HEAD_API/Lponr" xmlns="http://docs.oasis-open.org/odata/ns/edm">
-                <Annotation Term="Common.Label" String="Purchase Order Item"/>
-            </Annotations>
-            <Annotations Target="ZP_AISP_SESVIM_HEAD_BNDSampleService.SES_VIM_HEAD_API/Lifnr" xmlns="http://docs.oasis-open.org/odata/ns/edm">
-                <Annotation Term="Common.Label" String="Vendor Code"/>
-            </Annotations>
-            <Annotations Target="ZP_AISP_SESVIM_HEAD_BNDSampleService.SES_VIM_HEAD_API/Status" xmlns="http://docs.oasis-open.org/odata/ns/edm">
-                <Annotation Term="Common.Label" String="Status"/>
-            </Annotations>
-            <Annotations Target="ZP_AISP_SESVIM_HEAD_BNDSampleService.SES_VIM_HEAD_API/Amount" xmlns="http://docs.oasis-open.org/odata/ns/edm">
-                <Annotation Term="Common.Label" String="Total Amount"/>
-            </Annotations>
-            <Annotations Target="ZP_AISP_SESVIM_HEAD_BNDSampleService.SES_VIM_HEAD_API/name1" xmlns="http://docs.oasis-open.org/odata/ns/edm">
-                <Annotation Term="Common.Label" String="Vendor Name"/>
-            </Annotations>
-            <Annotations Target="ZP_AISP_SESVIM_HEAD_BNDSampleService.SES_VIM_HEAD_API/Ship1" xmlns="http://docs.oasis-open.org/odata/ns/edm">
-                <Annotation Term="Common.Label" String="Shipping Info 1"/>
-            </Annotations>
-            <Annotations Target="ZP_AISP_SESVIM_HEAD_BNDSampleService.SES_VIM_HEAD_API/Ship2" xmlns="http://docs.oasis-open.org/odata/ns/edm">
-                <Annotation Term="Common.Label" String="Shipping Info 2"/>
-            </Annotations>
-            <Annotations Target="ZP_AISP_SESVIM_HEAD_BNDSampleService.SES_VIM_HEAD_API/Zterm" xmlns="http://docs.oasis-open.org/odata/ns/edm">
-                <Annotation Term="Common.Label" String="Payment Terms"/>
-            </Annotations>
-            <Annotations Target="ZP_AISP_SESVIM_HEAD_BNDSampleService.SES_VIM_HEAD_API/Vendoraddress" xmlns="http://docs.oasis-open.org/odata/ns/edm">
-                <Annotation Term="Common.Label" String="Vendor Address"/>
-            </Annotations>
-            <Annotations Target="ZP_AISP_SESVIM_HEAD_BNDSampleService.SES_VIM_HEAD_API/Bankacc" xmlns="http://docs.oasis-open.org/odata/ns/edm">
-                <Annotation Term="Common.Label" String="Bank Account"/>
-            </Annotations>
-            <Annotations Target="ZP_AISP_SESVIM_HEAD_BNDSampleService.SES_VIM_HEAD_API/Bankname" xmlns="http://docs.oasis-open.org/odata/ns/edm">
-                <Annotation Term="Common.Label" String="Bank Name"/>
-            </Annotations>
-            <Annotations Target="ZP_AISP_SESVIM_HEAD_BNDSampleService.SES_VIM_HEAD_API/Spras" xmlns="http://docs.oasis-open.org/odata/ns/edm">
-                <Annotation Term="Common.Label" String="Language Key"/>
-            </Annotations>
-            <Annotations Target="ZP_AISP_SESVIM_HEAD_BNDSampleService.SES_VIM_HEAD_API/Ekorg" xmlns="http://docs.oasis-open.org/odata/ns/edm">
-                <Annotation Term="Common.Label" String="Purchasing Organization"/>
-            </Annotations>
-            <Annotations Target="ZP_AISP_SESVIM_HEAD_BNDSampleService.SES_VIM_HEAD_API/Ekgrp" xmlns="http://docs.oasis-open.org/odata/ns/edm">
-                <Annotation Term="Common.Label" String="Purchasing Group"/>
-            </Annotations>
-            <Annotations Target="ZP_AISP_SESVIM_HEAD_BNDSampleService.SES_VIM_HEAD_API/Waers" xmlns="http://docs.oasis-open.org/odata/ns/edm">
-                <Annotation Term="Common.Label" String="Currency"/>
-            </Annotations>
-            <Annotations Target="ZP_AISP_SESVIM_HEAD_BNDSampleService.SES_VIM_HEAD_API/Kufix" xmlns="http://docs.oasis-open.org/odata/ns/edm">
-                <Annotation Term="Common.Label" String="Exchange Rate Fixed"/>
-            </Annotations>
-            <Annotations Target="ZP_AISP_SESVIM_HEAD_BNDSampleService.SES_VIM_HEAD_API/Bedat" xmlns="http://docs.oasis-open.org/odata/ns/edm">
-                <Annotation Term="Common.Label" String="Document Date"/>
-            </Annotations>
-            <Annotations Target="ZP_AISP_SESVIM_HEAD_BNDSampleService.SES_VIM_HEAD_API/Dptyp" xmlns="http://docs.oasis-open.org/odata/ns/edm">
-                <Annotation Term="Common.Label" String="Down Payment Type"/>
-            </Annotations>
-            <Annotations Target="ZP_AISP_SESVIM_HEAD_BNDSampleService.SES_VIM_HEAD_API/Dppct" xmlns="http://docs.oasis-open.org/odata/ns/edm">
-                <Annotation Term="Common.Label" String="Down Payment Percentage"/>
-            </Annotations>
-            <Annotations Target="ZP_AISP_SESVIM_HEAD_BNDSampleService.SES_VIM_HEAD_API/Dpamt" xmlns="http://docs.oasis-open.org/odata/ns/edm">
-                <Annotation Term="Common.Label" String="Down Payment Amount"/>
-            </Annotations>
-            <Annotations Target="ZP_AISP_SESVIM_HEAD_BNDSampleService.SES_VIM_HEAD_API/Dpdat" xmlns="http://docs.oasis-open.org/odata/ns/edm">
-                <Annotation Term="Common.Label" String="Down Payment Date"/>
-            </Annotations>
-            <Annotations Target="ZP_AISP_SESVIM_HEAD_BNDSampleService.SES_VIM_ITEM_API/Lblni" xmlns="http://docs.oasis-open.org/odata/ns/edm">
-                <Annotation Term="Common.Label" String="Service Sheet No"/>
-            </Annotations>
-            <Annotations Target="ZP_AISP_SESVIM_HEAD_BNDSampleService.SES_VIM_ITEM_API/Ebeln" xmlns="http://docs.oasis-open.org/odata/ns/edm">
-                <Annotation Term="Common.Label" String="PO Number"/>
-            </Annotations>
-            <Annotations Target="ZP_AISP_SESVIM_HEAD_BNDSampleService.SES_VIM_ITEM_API/Ebelp" xmlns="http://docs.oasis-open.org/odata/ns/edm">
-                <Annotation Term="Common.Label" String="PO Item"/>
-            </Annotations>
-            <Annotations Target="ZP_AISP_SESVIM_HEAD_BNDSampleService.SES_VIM_ITEM_API/Lblne" xmlns="http://docs.oasis-open.org/odata/ns/edm">
-                <Annotation Term="Common.Label" String="SES Line Item"/>
-            </Annotations>
-            <Annotations Target="ZP_AISP_SESVIM_HEAD_BNDSampleService.SES_VIM_ITEM_API/Ernam" xmlns="http://docs.oasis-open.org/odata/ns/edm">
-                <Annotation Term="Common.Label" String="Created By"/>
-            </Annotations>
-            <Annotations Target="ZP_AISP_SESVIM_HEAD_BNDSampleService.SES_VIM_ITEM_API/Erdat" xmlns="http://docs.oasis-open.org/odata/ns/edm">
-                <Annotation Term="Common.Label" String="Created On"/>
-            </Annotations>
-            <Annotations Target="ZP_AISP_SESVIM_HEAD_BNDSampleService.SES_VIM_ITEM_API/Aedat" xmlns="http://docs.oasis-open.org/odata/ns/edm">
-                <Annotation Term="Common.Label" String="Changed On"/>
-            </Annotations>
-            <Annotations Target="ZP_AISP_SESVIM_HEAD_BNDSampleService.SES_VIM_ITEM_API/Aenam" xmlns="http://docs.oasis-open.org/odata/ns/edm">
-                <Annotation Term="Common.Label" String="Changed By"/>
-            </Annotations>
-            <Annotations Target="ZP_AISP_SESVIM_HEAD_BNDSampleService.SES_VIM_ITEM_API/Sbnamag" xmlns="http://docs.oasis-open.org/odata/ns/edm">
-                <Annotation Term="Common.Label" String="Approval Group"/>
-            </Annotations>
-            <Annotations Target="ZP_AISP_SESVIM_HEAD_BNDSampleService.SES_VIM_ITEM_API/Sbnaman" xmlns="http://docs.oasis-open.org/odata/ns/edm">
-                <Annotation Term="Common.Label" String="Approver Name"/>
-            </Annotations>
-            <Annotations Target="ZP_AISP_SESVIM_HEAD_BNDSampleService.SES_VIM_ITEM_API/SubPackno" xmlns="http://docs.oasis-open.org/odata/ns/edm">
-                <Annotation Term="Common.Label" String="Sub Package No."/>
-            </Annotations>
-            <Annotations Target="ZP_AISP_SESVIM_HEAD_BNDSampleService.SES_VIM_ITEM_API/Status" xmlns="http://docs.oasis-open.org/odata/ns/edm">
-                <Annotation Term="Common.Label" String="Item Status"/>
-            </Annotations>
-            <Annotations Target="ZP_AISP_SESVIM_HEAD_BNDSampleService.SES_VIM_ITEM_API/Lzvon" xmlns="http://docs.oasis-open.org/odata/ns/edm">
-                <Annotation Term="Common.Label" String="Start Date"/>
-            </Annotations>
-            <Annotations Target="ZP_AISP_SESVIM_HEAD_BNDSampleService.SES_VIM_ITEM_API/Lzbis" xmlns="http://docs.oasis-open.org/odata/ns/edm">
-                <Annotation Term="Common.Label" String="End Date"/>
-            </Annotations>
-            <Annotations Target="ZP_AISP_SESVIM_HEAD_BNDSampleService.SES_VIM_ITEM_API/Lwert" xmlns="http://docs.oasis-open.org/odata/ns/edm">
-                <Annotation Term="Common.Label" String="Planned Value"/>
-            </Annotations>
-            <Annotations Target="ZP_AISP_SESVIM_HEAD_BNDSampleService.SES_VIM_ITEM_API/Uwert" xmlns="http://docs.oasis-open.org/odata/ns/edm">
-                <Annotation Term="Common.Label" String="Actual Value"/>
-            </Annotations>
-            <Annotations Target="ZP_AISP_SESVIM_HEAD_BNDSampleService.SES_VIM_ITEM_API/Unplv" xmlns="http://docs.oasis-open.org/odata/ns/edm">
-                <Annotation Term="Common.Label" String="Unplanned Value"/>
-            </Annotations>
-            <Annotations Target="ZP_AISP_SESVIM_HEAD_BNDSampleService.SES_VIM_ITEM_API/Waers" xmlns="http://docs.oasis-open.org/odata/ns/edm">
-                <Annotation Term="Common.Label" String="Currency"/>
-            </Annotations>
-            <Annotations Target="ZP_AISP_SESVIM_HEAD_BNDSampleService.SES_VIM_ITEM_API/Packno" xmlns="http://docs.oasis-open.org/odata/ns/edm">
-                <Annotation Term="Common.Label" String="Package No."/>
-            </Annotations>
-            <Annotations Target="ZP_AISP_SESVIM_HEAD_BNDSampleService.SES_VIM_ITEM_API/Txz01" xmlns="http://docs.oasis-open.org/odata/ns/edm">
-                <Annotation Term="Common.Label" String="Short Text"/>
-            </Annotations>
-            <Annotations Target="ZP_AISP_SESVIM_HEAD_BNDSampleService.SES_VIM_ITEM_API/Loekz" xmlns="http://docs.oasis-open.org/odata/ns/edm">
-                <Annotation Term="Common.Label" String="Deletion Indicator"/>
-            </Annotations>
-            <Annotations Target="ZP_AISP_SESVIM_HEAD_BNDSampleService.SES_VIM_ITEM_API/Kzabn" xmlns="http://docs.oasis-open.org/odata/ns/edm">
-                <Annotation Term="Common.Label" String="Final Indicator"/>
-            </Annotations>
-            <Annotations Target="ZP_AISP_SESVIM_HEAD_BNDSampleService.SES_VIM_ITEM_API/Final" xmlns="http://docs.oasis-open.org/odata/ns/edm">
-                <Annotation Term="Common.Label" String="Final Entry"/>
-            </Annotations>
-            <Annotations Target="ZP_AISP_SESVIM_HEAD_BNDSampleService.SES_VIM_ITEM_API/Pwwe" xmlns="http://docs.oasis-open.org/odata/ns/edm">
-                <Annotation Term="Common.Label" String="Performance Start"/>
-            </Annotations>
-            <Annotations Target="ZP_AISP_SESVIM_HEAD_BNDSampleService.SES_VIM_ITEM_API/Pwfr" xmlns="http://docs.oasis-open.org/odata/ns/edm">
-                <Annotation Term="Common.Label" String="Performance End"/>
-            </Annotations>
-            <Annotations Target="ZP_AISP_SESVIM_HEAD_BNDSampleService.SES_VIM_ITEM_API/Bldat" xmlns="http://docs.oasis-open.org/odata/ns/edm">
-                <Annotation Term="Common.Label" String="Document Date"/>
-            </Annotations>
-            <Annotations Target="ZP_AISP_SESVIM_HEAD_BNDSampleService.SES_VIM_ITEM_API/Budat" xmlns="http://docs.oasis-open.org/odata/ns/edm">
-                <Annotation Term="Common.Label" String="Posting Date"/>
-            </Annotations>
-            <Annotations Target="ZP_AISP_SESVIM_HEAD_BNDSampleService.SES_VIM_ITEM_API/Xblnr" xmlns="http://docs.oasis-open.org/odata/ns/edm">
-                <Annotation Term="Common.Label" String="Reference Doc No."/>
-            </Annotations>
-            <Annotations Target="ZP_AISP_SESVIM_HEAD_BNDSampleService.SES_VIM_ITEM_API/Bktxt" xmlns="http://docs.oasis-open.org/odata/ns/edm">
-                <Annotation Term="Common.Label" String="Header Text"/>
-            </Annotations>
-            <Annotations Target="ZP_AISP_SESVIM_HEAD_BNDSampleService.SES_VIM_ITEM_API/Knttp" xmlns="http://docs.oasis-open.org/odata/ns/edm">
-                <Annotation Term="Common.Label" String="Account Assignment Category"/>
-            </Annotations>
-            <Annotations Target="ZP_AISP_SESVIM_HEAD_BNDSampleService.SES_VIM_ITEM_API/Kzvbr" xmlns="http://docs.oasis-open.org/odata/ns/edm">
-                <Annotation Term="Common.Label" String="Usage Indicator"/>
-            </Annotations>
-            <Annotations Target="ZP_AISP_SESVIM_HEAD_BNDSampleService.SES_VIM_ITEM_API/Netwr" xmlns="http://docs.oasis-open.org/odata/ns/edm">
-                <Annotation Term="Common.Label" String="Net Value"/>
-            </Annotations>
-            <Annotations Target="ZP_AISP_SESVIM_HEAD_BNDSampleService.SES_VIM_DETAILS_API/Packno" xmlns="http://docs.oasis-open.org/odata/ns/edm">
-                <Annotation Term="Common.Label" String="Package Number"/>
-            </Annotations>
-            <Annotations Target="ZP_AISP_SESVIM_HEAD_BNDSampleService.SES_VIM_DETAILS_API/Introw" xmlns="http://docs.oasis-open.org/odata/ns/edm">
-                <Annotation Term="Common.Label" String="Internal Row"/>
-            </Annotations>
-            <Annotations Target="ZP_AISP_SESVIM_HEAD_BNDSampleService.SES_VIM_DETAILS_API/Extrow" xmlns="http://docs.oasis-open.org/odata/ns/edm">
-                <Annotation Term="Common.Label" String="External Row"/>
-            </Annotations>
-            <Annotations Target="ZP_AISP_SESVIM_HEAD_BNDSampleService.SES_VIM_DETAILS_API/Del" xmlns="http://docs.oasis-open.org/odata/ns/edm">
-                <Annotation Term="Common.Label" String="Deleted Indicator"/>
-            </Annotations>
-            <Annotations Target="ZP_AISP_SESVIM_HEAD_BNDSampleService.SES_VIM_DETAILS_API/Srvpos" xmlns="http://docs.oasis-open.org/odata/ns/edm">
-                <Annotation Term="Common.Label" String="Service Position"/>
-            </Annotations>
-            <Annotations Target="ZP_AISP_SESVIM_HEAD_BNDSampleService.SES_VIM_DETAILS_API/Rang" xmlns="http://docs.oasis-open.org/odata/ns/edm">
-                <Annotation Term="Common.Label" String="Range"/>
-            </Annotations>
-            <Annotations Target="ZP_AISP_SESVIM_HEAD_BNDSampleService.SES_VIM_DETAILS_API/Extgroup" xmlns="http://docs.oasis-open.org/odata/ns/edm">
-                <Annotation Term="Common.Label" String="External Group"/>
-            </Annotations>
-            <Annotations Target="ZP_AISP_SESVIM_HEAD_BNDSampleService.SES_VIM_DETAILS_API/Pckge" xmlns="http://docs.oasis-open.org/odata/ns/edm">
-                <Annotation Term="Common.Label" String="Package"/>
-            </Annotations>
-            <Annotations Target="ZP_AISP_SESVIM_HEAD_BNDSampleService.SES_VIM_DETAILS_API/SubPackno" xmlns="http://docs.oasis-open.org/odata/ns/edm">
-                <Annotation Term="Common.Label" String="Sub Package No."/>
-            </Annotations>
-            <Annotations Target="ZP_AISP_SESVIM_HEAD_BNDSampleService.SES_VIM_DETAILS_API/Lbnum" xmlns="http://docs.oasis-open.org/odata/ns/edm">
-                <Annotation Term="Common.Label" String="Label Number"/>
-            </Annotations>
-            <Annotations Target="ZP_AISP_SESVIM_HEAD_BNDSampleService.SES_VIM_DETAILS_API/Ausgb" xmlns="http://docs.oasis-open.org/odata/ns/edm">
-                <Annotation Term="Common.Label" String="Output Type"/>
-            </Annotations>
-            <Annotations Target="ZP_AISP_SESVIM_HEAD_BNDSampleService.SES_VIM_DETAILS_API/Stlvpos" xmlns="http://docs.oasis-open.org/odata/ns/edm">
-                <Annotation Term="Common.Label" String="Service Level Pos."/>
-            </Annotations>
-            <Annotations Target="ZP_AISP_SESVIM_HEAD_BNDSampleService.SES_VIM_DETAILS_API/Extsrvno" xmlns="http://docs.oasis-open.org/odata/ns/edm">
-                <Annotation Term="Common.Label" String="External Service No."/>
-            </Annotations>
-            <Annotations Target="ZP_AISP_SESVIM_HEAD_BNDSampleService.SES_VIM_DETAILS_API/Menge" xmlns="http://docs.oasis-open.org/odata/ns/edm">
-                <Annotation Term="Common.Label" String="Quantity"/>
-            </Annotations>
-            <Annotations Target="ZP_AISP_SESVIM_HEAD_BNDSampleService.SES_VIM_DETAILS_API/Meins" xmlns="http://docs.oasis-open.org/odata/ns/edm">
-                <Annotation Term="Common.Label" String="Unit of Measure"/>
-            </Annotations>
-            <Annotations Target="ZP_AISP_SESVIM_HEAD_BNDSampleService.SES_VIM_DETAILS_API/Uebto" xmlns="http://docs.oasis-open.org/odata/ns/edm">
-                <Annotation Term="Common.Label" String="Overdelivery Tolerance"/>
-            </Annotations>
-            <Annotations Target="ZP_AISP_SESVIM_HEAD_BNDSampleService.SES_VIM_DETAILS_API/Uebtk" xmlns="http://docs.oasis-open.org/odata/ns/edm">
-                <Annotation Term="Common.Label" String="Unlimited Overdelivery"/>
-            </Annotations>
-            <Annotations Target="ZP_AISP_SESVIM_HEAD_BNDSampleService.SES_VIM_DETAILS_API/WithLim" xmlns="http://docs.oasis-open.org/odata/ns/edm">
-                <Annotation Term="Common.Label" String="With Limit"/>
-            </Annotations>
-            <Annotations Target="ZP_AISP_SESVIM_HEAD_BNDSampleService.SES_VIM_DETAILS_API/Spinf" xmlns="http://docs.oasis-open.org/odata/ns/edm">
-                <Annotation Term="Common.Label" String="Service Info Record Exists"/>
-            </Annotations>
-            <Annotations Target="ZP_AISP_SESVIM_HEAD_BNDSampleService.SES_VIM_DETAILS_API/Peinh" xmlns="http://docs.oasis-open.org/odata/ns/edm">
-                <Annotation Term="Common.Label" String="Price Unit"/>
-            </Annotations>
-            <Annotations Target="ZP_AISP_SESVIM_HEAD_BNDSampleService.SES_VIM_DETAILS_API/Unitprice" xmlns="http://docs.oasis-open.org/odata/ns/edm">
-                <Annotation Term="Common.Label" String="Unit Price"/>
-            </Annotations>
-            <Annotations Target="ZP_AISP_SESVIM_HEAD_BNDSampleService.SES_VIM_DETAILS_API/Itemtotalprice" xmlns="http://docs.oasis-open.org/odata/ns/edm">
-                <Annotation Term="Common.Label" String="Item Total Price"/>
-            </Annotations>
-            <Annotations Target="ZP_AISP_SESVIM_HEAD_BNDSampleService.SES_VIM_DETAILS_API/Frompos" xmlns="http://docs.oasis-open.org/odata/ns/edm">
-                <Annotation Term="Common.Label" String="From Position"/>
-            </Annotations>
-            <Annotations Target="ZP_AISP_SESVIM_HEAD_BNDSampleService.SES_VIM_DETAILS_API/Waers" xmlns="http://docs.oasis-open.org/odata/ns/edm">
-                <Annotation Term="Common.Label" String="Currency"/>
-            </Annotations>
-            <Annotations Target="ZP_AISP_SESVIM_HEAD_BNDSampleService.SES_VIM_DETAILS_API/Topos" xmlns="http://docs.oasis-open.org/odata/ns/edm">
-                <Annotation Term="Common.Label" String="To Position"/>
-            </Annotations>
-            <Annotations Target="ZP_AISP_SESVIM_HEAD_BNDSampleService.SES_VIM_DETAILS_API/Ktext1" xmlns="http://docs.oasis-open.org/odata/ns/edm">
-                <Annotation Term="Common.Label" String="Short Text"/>
-            </Annotations>
-            <Annotations Target="ZP_AISP_SESVIM_HEAD_BNDSampleService.SES_VIM_DETAILS_API/Vrtkz" xmlns="http://docs.oasis-open.org/odata/ns/edm">
-                <Annotation Term="Common.Label" String="Contract Item"/>
-            </Annotations>
-            <Annotations Target="ZP_AISP_SESVIM_HEAD_BNDSampleService.SES_VIM_DETAILS_API/Twrkz" xmlns="http://docs.oasis-open.org/odata/ns/edm">
-                <Annotation Term="Common.Label" String="Target Work Center"/>
-            </Annotations>
-            <Annotations Target="ZP_AISP_SESVIM_HEAD_BNDSampleService.SES_VIM_DETAILS_API/Pernr" xmlns="http://docs.oasis-open.org/odata/ns/edm">
-                <Annotation Term="Common.Label" String="Personnel Number"/>
-            </Annotations>
-            <Annotations Target="ZP_AISP_SESVIM_HEAD_BNDSampleService.SES_VIM_DETAILS_API/Molga" xmlns="http://docs.oasis-open.org/odata/ns/edm">
-                <Annotation Term="Common.Label" String="Country Grouping"/>
-            </Annotations>
-            <Annotations Target="ZP_AISP_SESVIM_HEAD_BNDSampleService.SES_VIM_DETAILS_API/Lgart" xmlns="http://docs.oasis-open.org/odata/ns/edm">
-                <Annotation Term="Common.Label" String="Wage Type"/>
-            </Annotations>
-            <Annotations Target="ZP_AISP_SESVIM_HEAD_BNDSampleService.SES_VIM_DETAILS_API/Lgtxt" xmlns="http://docs.oasis-open.org/odata/ns/edm">
-                <Annotation Term="Common.Label" String="Wage Type Text"/>
-            </Annotations>
-            <Annotations Target="ZP_AISP_SESVIM_HEAD_BNDSampleService.SES_VIM_DETAILS_API/Stell" xmlns="http://docs.oasis-open.org/odata/ns/edm">
-                <Annotation Term="Common.Label" String="Position"/>
-            </Annotations>
-            <Annotations Target="ZP_AISP_SESVIM_HEAD_BNDSampleService.SES_VIM_DETAILS_API/Iftnr" xmlns="http://docs.oasis-open.org/odata/ns/edm">
-                <Annotation Term="Common.Label" String="Service Number"/>
-            </Annotations>
-            <Annotations Target="ZP_AISP_SESVIM_HEAD_BNDSampleService.SES_VIM_DETAILS_API/Budat" xmlns="http://docs.oasis-open.org/odata/ns/edm">
-                <Annotation Term="Common.Label" String="Posting Date"/>
-            </Annotations>
-            <Annotations Target="ZP_AISP_SESVIM_HEAD_BNDSampleService.SES_VIM_DETAILS_API/Insdt" xmlns="http://docs.oasis-open.org/odata/ns/edm">
-                <Annotation Term="Common.Label" String="Inspection Date"/>
-            </Annotations>
-            <Annotations Target="ZP_AISP_SESVIM_HEAD_BNDSampleService.SES_VIM_DETAILS_API/PlnPackno" xmlns="http://docs.oasis-open.org/odata/ns/edm">
-                <Annotation Term="Common.Label" String="Planning Package No."/>
-            </Annotations>
-            <Annotations Target="ZP_AISP_SESVIM_HEAD_BNDSampleService.SES_VIM_DETAILS_API/PlnIntrow" xmlns="http://docs.oasis-open.org/odata/ns/edm">
-                <Annotation Term="Common.Label" String="Planning Internal Row"/>
-            </Annotations>
-            <Annotations Target="ZP_AISP_SESVIM_HEAD_BNDSampleService.SES_VIM_DETAILS_API/KntPackno" xmlns="http://docs.oasis-open.org/odata/ns/edm">
-                <Annotation Term="Common.Label" String="Account Assignment Package No."/>
-            </Annotations>
-            <Annotations Target="ZP_AISP_SESVIM_HEAD_BNDSampleService.SES_VIM_DETAILS_API/KntIntrow" xmlns="http://docs.oasis-open.org/odata/ns/edm">
-                <Annotation Term="Common.Label" String="Account Assignment Internal Row"/>
-            </Annotations>
-            <Annotations Target="ZP_AISP_SESVIM_HEAD_BNDSampleService.SES_VIM_DETAILS_API/TmpPackno" xmlns="http://docs.oasis-open.org/odata/ns/edm">
-                <Annotation Term="Common.Label" String="Template Package No."/>
-            </Annotations>
-            <Annotations Target="ZP_AISP_SESVIM_HEAD_BNDSampleService.SES_VIM_DETAILS_API/TmpIntrow" xmlns="http://docs.oasis-open.org/odata/ns/edm">
-                <Annotation Term="Common.Label" String="Template Internal Row"/>
-            </Annotations>
-            <Annotations Target="ZP_AISP_SESVIM_HEAD_BNDSampleService.SES_VIM_DETAILS_API/StlvLim" xmlns="http://docs.oasis-open.org/odata/ns/edm">
-                <Annotation Term="Common.Label" String="Limit for Service Level"/>
-            </Annotations>
-            <Annotations Target="ZP_AISP_SESVIM_HEAD_BNDSampleService.SES_VIM_DETAILS_API/LimitRow" xmlns="http://docs.oasis-open.org/odata/ns/edm">
-                <Annotation Term="Common.Label" String="Limit Row"/>
-            </Annotations>
-            <Annotations Target="ZP_AISP_SESVIM_HEAD_BNDSampleService.SES_VIM_DETAILS_API/ActMenge" xmlns="http://docs.oasis-open.org/odata/ns/edm">
-                <Annotation Term="Common.Label" String="Actual Quantity"/>
-            </Annotations>
-            <Annotations Target="ZP_AISP_SESVIM_HEAD_BNDSampleService.SES_VIM_DETAILS_API/ActWert" xmlns="http://docs.oasis-open.org/odata/ns/edm">
-                <Annotation Term="Common.Label" String="Actual Value"/>
-            </Annotations>
-            <Annotations Target="ZP_AISP_SESVIM_HEAD_BNDSampleService.SES_VIM_DETAILS_API/KntWert" xmlns="http://docs.oasis-open.org/odata/ns/edm">
-                <Annotation Term="Common.Label" String="Account Assignment Value"/>
-            </Annotations>
-            <Annotations Target="ZP_AISP_SESVIM_HEAD_BNDSampleService.SES_VIM_DETAILS_API/KntMenge" xmlns="http://docs.oasis-open.org/odata/ns/edm">
-                <Annotation Term="Common.Label" String="Account Assignment Quantity"/>
-            </Annotations>
-            <Annotations Target="ZP_AISP_SESVIM_HEAD_BNDSampleService.SES_VIM_DETAILS_API/Zielwert" xmlns="http://docs.oasis-open.org/odata/ns/edm">
-                <Annotation Term="Common.Label" String="Target Value"/>
-            </Annotations>
-            <Annotations Target="ZP_AISP_SESVIM_HEAD_BNDSampleService.SES_VIM_DETAILS_API/UngWert" xmlns="http://docs.oasis-open.org/odata/ns/edm">
-                <Annotation Term="Common.Label" String="Unplanned Value"/>
-            </Annotations>
-            <Annotations Target="ZP_AISP_SESVIM_HEAD_BNDSampleService.SES_VIM_DETAILS_API/UngMenge" xmlns="http://docs.oasis-open.org/odata/ns/edm">
-                <Annotation Term="Common.Label" String="Unplanned Quantity"/>
-            </Annotations>
-            <Annotations Target="ZP_AISP_SESVIM_HEAD_BNDSampleService.SES_VIM_DETAILS_API/AltIntrow" xmlns="http://docs.oasis-open.org/odata/ns/edm">
-                <Annotation Term="Common.Label" String="Alternative Internal Row"/>
-            </Annotations>
-            <Annotations Target="ZP_AISP_SESVIM_HEAD_BNDSampleService.SES_VIM_DETAILS_API/Basic" xmlns="http://docs.oasis-open.org/odata/ns/edm">
-                <Annotation Term="Common.Label" String="Basic Data"/>
-            </Annotations>
-            <Annotations Target="ZP_AISP_SESVIM_HEAD_BNDSampleService.SES_VIM_DETAILS_API/Alternat" xmlns="http://docs.oasis-open.org/odata/ns/edm">
-                <Annotation Term="Common.Label" String="Alternative"/>
-            </Annotations>
-            <Annotations Target="ZP_AISP_SESVIM_HEAD_BNDSampleService.SES_VIM_DETAILS_API/Bidder" xmlns="http://docs.oasis-open.org/odata/ns/edm">
-                <Annotation Term="Common.Label" String="Bidder"/>
-            </Annotations>
-            <Annotations Target="ZP_AISP_SESVIM_HEAD_BNDSampleService.SES_VIM_DETAILS_API/Supple" xmlns="http://docs.oasis-open.org/odata/ns/edm">
-                <Annotation Term="Common.Label" String="Supplementary Data"/>
-            </Annotations>
-            <Annotations Target="ZP_AISP_SESVIM_HEAD_BNDSampleService.SES_VIM_DETAILS_API/Freeqty" xmlns="http://docs.oasis-open.org/odata/ns/edm">
-                <Annotation Term="Common.Label" String="Free Quantity"/>
-            </Annotations>
-            <Annotations Target="ZP_AISP_SESVIM_HEAD_BNDSampleService.SES_VIM_DETAILS_API/Inform" xmlns="http://docs.oasis-open.org/odata/ns/edm">
-                <Annotation Term="Common.Label" String="Information Flag"/>
-            </Annotations>
-            <Annotations Target="ZP_AISP_SESVIM_HEAD_BNDSampleService.SES_VIM_DETAILS_API/Pausch" xmlns="http://docs.oasis-open.org/odata/ns/edm">
-                <Annotation Term="Common.Label" String="Flat Rate"/>
-            </Annotations>
-            <Annotations Target="ZP_AISP_SESVIM_HEAD_BNDSampleService.SES_VIM_DETAILS_API/Eventual" xmlns="http://docs.oasis-open.org/odata/ns/edm">
-                <Annotation Term="Common.Label" String="Eventual Service"/>
-            </Annotations>
-            <Annotations Target="ZP_AISP_SESVIM_HEAD_BNDSampleService.SES_VIM_DETAILS_API/Mwskz" xmlns="http://docs.oasis-open.org/odata/ns/edm">
-                <Annotation Term="Common.Label" String="Tax Code"/>
-            </Annotations>
-            <Annotations Target="ZP_AISP_SESVIM_HEAD_BNDSampleService.SES_VIM_DETAILS_API/Txjcd" xmlns="http://docs.oasis-open.org/odata/ns/edm">
-                <Annotation Term="Common.Label" String="Tax Jurisdiction Code"/>
-            </Annotations>
-            <Annotations Target="ZP_AISP_SESVIM_HEAD_BNDSampleService.SES_VIM_DETAILS_API/Txdat" xmlns="http://docs.oasis-open.org/odata/ns/edm">
-                <Annotation Term="Common.Label" String="Tax Date"/>
-            </Annotations>
-            <Annotations Target="ZP_AISP_SESVIM_HEAD_BNDSampleService.SES_VIM_DETAILS_API/PrsChg" xmlns="http://docs.oasis-open.org/odata/ns/edm">
-                <Annotation Term="Common.Label" String="Price Change Flag"/>
-            </Annotations>
-            <Annotations Target="ZP_AISP_SESVIM_HEAD_BNDSampleService.SES_VIM_DETAILS_API/Matkl" xmlns="http://docs.oasis-open.org/odata/ns/edm">
-                <Annotation Term="Common.Label" String="Material Group"/>
-            </Annotations>
-            <Annotations Target="ZP_AISP_SESVIM_HEAD_BNDSampleService.SES_VIM_DETAILS_API/Tbtwr" xmlns="http://docs.oasis-open.org/odata/ns/edm">
-                <Annotation Term="Common.Label" String="Gross Value"/>
-            </Annotations>
-            <Annotations Target="ZP_AISP_SESVIM_HEAD_BNDSampleService.SES_VIM_DETAILS_API/Navnw" xmlns="http://docs.oasis-open.org/odata/ns/edm">
-                <Annotation Term="Common.Label" String="Net Value"/>
-            </Annotations>
-            <Annotations Target="ZP_AISP_SESVIM_HEAD_BNDSampleService.SES_VIM_DETAILS_API/Baswr" xmlns="http://docs.oasis-open.org/odata/ns/edm">
-                <Annotation Term="Common.Label" String="Base Amount"/>
-            </Annotations>
-            <Annotations Target="ZP_AISP_SESVIM_HEAD_BNDSampleService.SES_VIM_DETAILS_API/Kknumv" xmlns="http://docs.oasis-open.org/odata/ns/edm">
-                <Annotation Term="Common.Label" String="Contract Number"/>
-            </Annotations>
-            <Annotations Target="ZP_AISP_SESVIM_HEAD_BNDSampleService.SES_VIM_DETAILS_API/Iwein" xmlns="http://docs.oasis-open.org/odata/ns/edm">
-                <Annotation Term="Common.Label" String="Unit for Work"/>
-            </Annotations>
-            <Annotations Target="ZP_AISP_SESVIM_HEAD_BNDSampleService.SES_VIM_DETAILS_API/IntWork" xmlns="http://docs.oasis-open.org/odata/ns/edm">
-                <Annotation Term="Common.Label" String="Internal Work"/>
-            </Annotations>
-            <Annotations Target="ZP_AISP_SESVIM_HEAD_BNDSampleService.SES_VIM_DETAILS_API/Externalid" xmlns="http://docs.oasis-open.org/odata/ns/edm">
-                <Annotation Term="Common.Label" String="External ID"/>
-            </Annotations>
-            <Annotations Target="ZP_AISP_SESVIM_HEAD_BNDSampleService.SES_VIM_DETAILS_API/Kstar" xmlns="http://docs.oasis-open.org/odata/ns/edm">
-                <Annotation Term="Common.Label" String="Cost Element"/>
-            </Annotations>
-            <Annotations Target="ZP_AISP_SESVIM_HEAD_BNDSampleService.SES_VIM_DETAILS_API/ActWork" xmlns="http://docs.oasis-open.org/odata/ns/edm">
-                <Annotation Term="Common.Label" String="Actual Work"/>
-            </Annotations>
-            <Annotations Target="ZP_AISP_SESVIM_HEAD_BNDSampleService.SES_VIM_DETAILS_API/Mapno" xmlns="http://docs.oasis-open.org/odata/ns/edm">
-                <Annotation Term="Common.Label" String="Map Number"/>
-            </Annotations>
-            <Annotations Target="ZP_AISP_SESVIM_HEAD_BNDSampleService.SES_VIM_DETAILS_API/Srvmapkey" xmlns="http://docs.oasis-open.org/odata/ns/edm">
-                <Annotation Term="Common.Label" String="Service Map Key"/>
-            </Annotations>
-            <Annotations Target="ZP_AISP_SESVIM_HEAD_BNDSampleService.SES_VIM_DETAILS_API/Taxtariffcode" xmlns="http://docs.oasis-open.org/odata/ns/edm">
-                <Annotation Term="Common.Label" String="Tax Tariff Code"/>
-            </Annotations>
-            <Annotations Target="ZP_AISP_SESVIM_HEAD_BNDSampleService.SES_VIM_DETAILS_API/Sdate" xmlns="http://docs.oasis-open.org/odata/ns/edm">
-                <Annotation Term="Common.Label" String="Start Date"/>
-            </Annotations>
-            <Annotations Target="ZP_AISP_SESVIM_HEAD_BNDSampleService.SES_VIM_DETAILS_API/Begtime" xmlns="http://docs.oasis-open.org/odata/ns/edm">
-                <Annotation Term="Common.Label" String="Begin Time"/>
-            </Annotations>
-            <Annotations Target="ZP_AISP_SESVIM_HEAD_BNDSampleService.SES_VIM_DETAILS_API/Endtime" xmlns="http://docs.oasis-open.org/odata/ns/edm">
-                <Annotation Term="Common.Label" String="End Time"/>
-            </Annotations>
-            <Annotations Target="ZP_AISP_SESVIM_HEAD_BNDSampleService.SES_VIM_DETAILS_API/Persext" xmlns="http://docs.oasis-open.org/odata/ns/edm">
-                <Annotation Term="Common.Label" String="External Personnel Number"/>
-            </Annotations>
-            <Annotations Target="ZP_AISP_SESVIM_HEAD_BNDSampleService.SES_VIM_DETAILS_API/Catscounte" xmlns="http://docs.oasis-open.org/odata/ns/edm">
-                <Annotation Term="Common.Label" String="CATS Counter"/>
-            </Annotations>
-            <Annotations Target="ZP_AISP_SESVIM_HEAD_BNDSampleService.SES_VIM_DETAILS_API/Stokz" xmlns="http://docs.oasis-open.org/odata/ns/edm">
-                <Annotation Term="Common.Label" String="Stock Indicator"/>
-            </Annotations>
-            <Annotations Target="ZP_AISP_SESVIM_HEAD_BNDSampleService.SES_VIM_DETAILS_API/Belnr" xmlns="http://docs.oasis-open.org/odata/ns/edm">
-                <Annotation Term="Common.Label" String="Document Number"/>
-            </Annotations>
         </Schema>
     </edmx:DataServices>
 </edmx:Edmx>

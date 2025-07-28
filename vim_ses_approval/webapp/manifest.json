@@ -17,7 +17,7 @@
         },
         "dataSources": {
             "mainService": {
-                "uri": "/odata/v2/zp-aisp-sesvim-head-bndsample/",
+                "uri": "odata/v2/sesvim-customer-side/",
                 "type": "OData",
                 "settings": {
                     "annotations": [
@@ -120,9 +120,12 @@
                     ]
                 },
                 {
-                    "name": "InvoiceLogs",    
+                    "name": "InvoiceLogs",
                     "pattern": "Invoicepdf/request/{requestNo}",
-                    "target": ["TargetApprovalObj","Invoicepdf"]
+                    "target": [
+                        "TargetApprovalObj",
+                        "Invoicepdf"
+                    ]
                 }
             ],
             "targets": {
@@ -138,7 +141,6 @@
                     "viewLevel": 1,
                     "clearControlAggregation": true
                 },
-
                 "Invoicepdf": {
                     "viewId": "Invoicepdf",
                     "viewName": "Invoicepdf",

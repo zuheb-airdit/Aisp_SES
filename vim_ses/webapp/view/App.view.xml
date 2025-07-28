@@ -4,15 +4,14 @@
     xmlns:f="sap.f"
     xmlns="sap.m">
     <App id="app">
-    <Page enableScrolling="true">
-            <customHeader>
+    <Page enableScrolling="true" showHeader="false">
+            <!-- <customHeader>
                 <f:ShellBar
                     title="{i18n>title}"
-                    showCopilot="true"
-                    showSearch="true"
-                    showNotifications="true"
+                    showCopilot="false"
+                    showSearch="false"
+                    showNotifications="false"
                     showNavButton="false"
-                    notificationsNumber="2"
                     navButtonPressed="handleBackButtonPressed"
                 >
                     <f:menu />
@@ -20,7 +19,7 @@
                         <Avatar initials="ZA" />
                     </f:profile>
                 </f:ShellBar>
-            </customHeader>
+            </customHeader> -->
             <f:FlexibleColumnLayout
                 id="layout"
                 stateChange="onStateChanged"

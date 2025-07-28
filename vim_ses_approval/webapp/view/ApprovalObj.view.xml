@@ -14,8 +14,8 @@
         alwaysShowContentHeader="false"
         preserveHeaderStateOnScroll="false"
         headerContentPinnable="true"
-        headerContentPinned="true"
-        toggleHeaderOnTitleClick="false"
+        headerContentPinned="false"
+        toggleHeaderOnTitleClick="true"
         showFooter="true"
         isChildPage="true"
         upperCaseAnchorBar="false"
@@ -35,7 +35,7 @@
                 </breadcrumbs>
                 <expandedHeading>
                     <m:Title
-                        text="{invoiceContext>/header/REQUEST_NO}"
+                        text="REQ NO: {invoiceContext>/header/REQUEST_NO}"
                         wrapping="true"
                     />
                 </expandedHeading>
@@ -52,11 +52,7 @@
                         />
                         <m:VBox wrap="Wrap">
                             <m:Title
-                                text="{invoiceContext>/header/Ebeln}"
-                                wrapping="true"
-                            />
-                            <m:Label
-                                text="PO NO:"
+                                text="PO NO: {invoiceContext>/header/Ebeln}"
                                 wrapping="true"
                             />
                         </m:VBox>
@@ -165,7 +161,7 @@
                         />
                         <m:ObjectStatus
                             text="{invoiceContext>/header/STATUS_DESC}"
-                            state="Indication13"
+                            state="Indication10"
                         />
                     </m:HBox>
                 </m:VBox>

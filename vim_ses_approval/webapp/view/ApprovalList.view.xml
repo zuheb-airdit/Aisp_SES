@@ -7,15 +7,27 @@
     xmlns:core="sap.ui.core"
     xmlns="sap.m"
 >
-    <Page>
+    <Page
+        title="SES - VIM Approval"
+        titleLevel="H6"
+    >
         <smartFilterBar:SmartFilterBar
             id="smartFilterBar"
-            entitySet="SES_VIM_HEAD_API"
             persistencyKey="SmartFilter_Explored"
+            showFilterConfiguration="false"
+            
         >
             <smartFilterBar:controlConfiguration>
                 <smartFilterBar:ControlConfiguration
                     key="Bedat"
+                    label="Order Date"
+                    visibleInAdvancedArea="true"
+                    conditionType="{
+								module: 'sap.ui.comp.config.condition.DateRangeType'
+							}"
+                />
+                <smartFilterBar:ControlConfiguration
+                    key="CREATED_ON"
                     label="Order Date"
                     visibleInAdvancedArea="true"
                     conditionType="{
@@ -42,6 +54,7 @@
                         smartFilterId="smartFilterBar"
                         enableExport="true"
                         beforeExport="onBeforeExport"
+                        enableCopy="false"
                         useVariantManagement="true"
                         useTablePersonalisation="true"
                         header="Pending Orders"
@@ -52,6 +65,7 @@
                         demandPopin="true"
                         enableAutoColumnWidth="true"
                         id="idSmartTablePend"
+                        ignoredFields="APPROVED_COMMENT,REJECTED_COMMENT,APPROVER_LEVEL,PURCHASE_ORG,BANK_NAME,BANK_ACCOUNT,VENDOR_ADDRESS,DOWNPAYMENT_AMOUNT,DOWNPAYMENT_PERCENTAGE,VENDOR_STATUS,LAST_UPDATED_ON,APPROVER_ROLE,CURRENT_ASSIGNEE,INVOICE_NUMBER,INVOICE_DATE,STATUS,CREATED_BY,ORDER_DATE,STATUS_DESC,SUPPLIER_ORG_NAME,TOTAL_AMOUNT"
                     >
                         <Table
                             selectionChange="selectionChangeHandlerRregister"
@@ -59,7 +73,7 @@
                             growingThreshold="10"
                         >
                             <columns>
-                            <Column>
+                                <Column>
                                     <customData>
                                         <core:CustomData
                                             key="p13nData"
@@ -128,8 +142,8 @@
                                     press="onClickofPONumber"
                                 >
                                     <cells>
-                                     <Text text="{REQUEST_NO}" />                                
-                                       <Link
+                                        <Text text="{REQUEST_NO}" />
+                                        <Link
                                             text="{INVOICE_NUMBER}"
                                             press="onClickofPONumber"
                                         />
@@ -164,6 +178,7 @@
                         useVariantManagement="true"
                         useTablePersonalisation="true"
                         header="Pending Orders"
+                        enableCopy="false"
                         showRowCount="true"
                         persistencyKey="SmartTableRefApp_Explored"
                         enableAutoBinding="true"
@@ -171,6 +186,8 @@
                         tableType="ResponsiveTable"
                         demandPopin="true"
                         enableAutoColumnWidth="true"
+                        ignoredFields="APPROVED_COMMENT,REJECTED_COMMENT,APPROVER_LEVEL,PURCHASE_ORG,BANK_NAME,BANK_ACCOUNT,VENDOR_ADDRESS,DOWNPAYMENT_AMOUNT,DOWNPAYMENT_PERCENTAGE,VENDOR_STATUS,LAST_UPDATED_ON,APPROVER_ROLE,CURRENT_ASSIGNEE,INVOICE_NUMBER,INVOICE_DATE,STATUS,CREATED_BY,ORDER_DATE,STATUS_DESC,SUPPLIER_ORG_NAME,TOTAL_AMOUNT"
+
                     >
                         <Table
                             selectionChange="selectionChangeHandlerRregister"
@@ -178,7 +195,7 @@
                             growingThreshold="10"
                         >
                             <columns>
-                           <Column>
+                                <Column>
                                     <customData>
                                         <core:CustomData
                                             key="p13nData"
@@ -226,7 +243,7 @@
                                         wrapping="true"
                                     />
                                 </Column>
-                                 <Column>
+                                <Column>
                                     <customData>
                                         <core:CustomData
                                             key="p13nData"
@@ -259,7 +276,7 @@
                                     press="onClickofPONumber"
                                 >
                                     <cells>
-                                    <Text text="{REQUEST_NO}" />
+                                        <Text text="{REQUEST_NO}" />
                                         <Link
                                             text="{INVOICE_NUMBER}"
                                             press="onClickofPONumber"
@@ -284,7 +301,7 @@
 
                 <IconTabFilter
                     key="invoices"
-                    icon="./Images/inprogress.png"
+                    icon="./Images/Rejected.png"
                     text="Rejected"
                 >
                     <smartTable:SmartTable
@@ -296,6 +313,7 @@
                         useVariantManagement="true"
                         useTablePersonalisation="true"
                         header="Pending Orders"
+                        enableCopy="false"
                         showRowCount="true"
                         persistencyKey="SmartTableRefApp_Explored"
                         enableAutoBinding="true"
@@ -310,7 +328,7 @@
                             growingThreshold="10"
                         >
                             <columns>
-                            <Column>
+                                <Column>
                                     <customData>
                                         <core:CustomData
                                             key="p13nData"
@@ -379,7 +397,7 @@
                                     press="onClickofPONumber"
                                 >
                                     <cells>
-                                    <Text text="{REQUEST_NO}" />
+                                        <Text text="{REQUEST_NO}" />
                                         <Link
                                             text="{INVOICE_NUMBER}"
                                             press="onClickofPONumber"

@@ -189,9 +189,17 @@ sap.ui.define([
                     });
 
                     // Aggregate and set in model
+                    // Promise.all(aDetailPromises).then(allDetails => {
+                    //     const flattenedDetails = allDetails.flat();
+                    //     oGlobalModel.setProperty("/selectedSESDetails", flattenedDetails);
+                    // });
                     Promise.all(aDetailPromises).then(allDetails => {
                         const flattenedDetails = allDetails.flat();
-                        oGlobalModel.setProperty("/selectedSESDetails", flattenedDetails);
+                        const cleanedDetails = flattenedDetails.map(item => {
+                            const { _id, __metadata, ...cleanedItem } = item;
+                            return cleanedItem;
+                        });
+                        oGlobalModel.setProperty("/selectedSESDetails", cleanedDetails);
                     });
 
 

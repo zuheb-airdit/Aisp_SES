@@ -4,8 +4,8 @@
     xmlns:f="sap.f"
     xmlns="sap.m">
     <App id="app">
-    <Page enableScrolling="true">
-            <customHeader>
+    <Page enableScrolling="true" showHeader="false">
+            <!-- <customHeader>
                 <f:ShellBar
                     title="SES - VIM Approval"
                     showCopilot="true"
@@ -20,7 +20,7 @@
                         <Avatar initials="ZA" />
                     </f:profile>
                 </f:ShellBar>
-            </customHeader>
+            </customHeader> -->
             <f:FlexibleColumnLayout
                 id="layout"
                 stateChange="onStateChanged"

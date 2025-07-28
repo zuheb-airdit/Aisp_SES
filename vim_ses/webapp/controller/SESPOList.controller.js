@@ -5,6 +5,7 @@ sap.ui.define([
 
     return Controller.extend("com.vimses.vimses.controller.SESPOList", {
         onInit() {
+            this.byId("smartFilterBar").setEntitySet("SES_VIM_HEAD_API");
         },
 
         formatODataDate: function (dateValue) {
@@ -35,11 +36,16 @@ sap.ui.define([
             const selectedKey = oEvent.getParameter("key");
             if (selectedKey === "pending") {
                 const oSmartTable = this.byId("idSmartTablePend");
+                this.byId("smartFilterBar").setVisible(true);
+                this.byId("smartFilterBar2").setVisible(false);
                 if (oSmartTable) {
                     oSmartTable.rebindTable();
                 }
             } else if (selectedKey === "invoices") {
                 const oSmartTable = this.byId("idSmartTableInv");
+                this.byId("smartFilterBar").setEntitySet("SESVimHead");
+                this.byId("smartFilterBar").setVisible(false);
+                this.byId("smartFilterBar2").setVisible(true);
                 if (oSmartTable) {
                     oSmartTable.rebindTable();
                 }
